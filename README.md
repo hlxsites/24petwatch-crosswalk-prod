@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+- Preview: https://main--24petchwatch--hlxsites.hlx.page/
+- Live: https://main--24petchwatch--hlxsites.hlx.live/
 
 ## Installation
 
