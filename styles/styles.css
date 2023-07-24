@@ -10,6 +10,50 @@
  * governing permissions and limitations under the License.
  */
 
+@font-face {
+  font-family: FSMePro;
+  src: url('/fonts/FSMePro.woff');
+  font-display: swap
+}
+
+@font-face {
+  font-family: GothamRounded;
+  src: url('/fonts/GothamRnd-Medium_Web.woff');
+  font-weight: 400;
+  font-display: swap
+}
+
+@font-face {
+  font-family: GothamRounded;
+  src: url('/fonts/GothamRnd-Book_Web.woff');
+  font-weight: 300;
+  font-display: swap
+}
+
+@font-face {
+  font-family: FSAlbertExtraBold;
+  src: url('/fonts/fa-light-300.woff2');
+  font-display: swap
+}
+
+@font-face {
+  font-family: FSMeWebBold;
+  src: url('/fonts/FSMePro.woff');
+  font-display: swap
+}
+
+@font-face {
+  font-family: 'fsmepro-normal-400-fallback';
+  size-adjust: 100.871%;
+  src: local(arial);
+}
+
+@font-face {
+  font-family: 'gothamrounded-normal-400-fallback';
+  size-adjust: 112.991%;
+  src: local(arial);
+}
+
  :root {
   /* colors */
   --link-color: #035fe6;
@@ -18,10 +62,11 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+   --heading-text-color: #333f48;
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
-  --heading-font-family: var(--body-font-family);
+  --body-font-family: 'FSMePro', fsmepro-normal-400-fallback, arial, helvetica, sans-serif;
+  --heading-font-family: 'GothamRounded', gothamrounded-normal-400-fallback, arial, helvetica, sans-serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
@@ -30,11 +75,11 @@
   --body-font-size-xs: 16px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
+  --heading-font-size-xxl: 1.75rem;
+  --heading-font-size-xl: 1.3125rem;
+  --heading-font-size-l: 1.125rem;
+  --heading-font-size-m: 1rem;
+  --heading-font-size-s: 0.9375rem;
   --heading-font-size-xs: 18px;
 
   /* nav height */
@@ -79,6 +124,7 @@ h4, h5, h6 {
   margin-top: 1em;
   margin-bottom: .5em;
   scroll-margin: calc(var(--nav-height) + 1em);
+  color: var(--heading-text-color);
 }
 
 h1 { font-size: var(--heading-font-size-xxl) }
