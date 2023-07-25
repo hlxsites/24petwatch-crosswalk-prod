@@ -61,7 +61,7 @@
   --background-color: #fff;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
-  --text-color: #000;
+  --text-color: #333f48;
   --text-secondary-color: #bf0d3e;
   --heading-text-color: #333f48;
 
@@ -71,31 +71,46 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
+  --body-font-size-m: 1rem;
   --body-font-size-s: 18px;
   --body-font-size-xs: 16px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 1.75rem;
-  --heading-font-size-xl: 1.3125rem;
-  --heading-font-size-l: 1.125rem;
-  --heading-font-size-m: 1rem;
-  --heading-font-size-s: 0.9375rem;
-  --heading-font-size-xs: 18px;
+  --heading-font-size-xxl: 2.1875rem;
+  --heading-font-size-xl: 1.625rem;
+  --heading-font-size-l: 1.3125rem;
+  --heading-font-size-m: 1.3125rem;
+  --heading-font-size-s: 1.3125rem;
+  --heading-font-size-xs: 1rem;
+
+  /* heading line heights */
+  --heading-line-height-xxl: 2.813rem;
+  --heading-line-height-xl: 2.25rem;
+  --heading-line-height-l: 1.938rem;
+  --heading-line-height-m: 1.938rem;
+  --heading-line-height-s: 1.938rem;
+  --heading-line-height-xs: 1.625rem;
+
+  /* heading font weight */
+  --heading-font-weight: 400;
 
   /* nav height */
   --nav-height: 64px;
-
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
+    /* heading sizes */
+    --heading-font-size-xxl: 3rem;
+    --heading-font-size-xl: 2.5rem;
+    --heading-font-size-l: 2.1875rem;
+    --heading-font-size-m: 1.625rem;
+
+    /* heading line heights */
+    --heading-line-height-xxl: 3.625rem;
+    --heading-line-height-xl: 3.125rem;
+    --heading-line-height-l: 2.813rem;
+    --heading-line-height-m: 2.25rem;
   }
 }
 
@@ -121,20 +136,44 @@ header {
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
   scroll-margin: calc(var(--nav-height) + 1em);
   color: var(--heading-text-color);
+  text-align: center;
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  line-height: var(--heading-line-height-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+  line-height: var(--heading-line-height-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+  line-height: var(--heading-line-height-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+  line-height: var(--heading-line-height-xs);
+}
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
