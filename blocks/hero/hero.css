@@ -1,5 +1,4 @@
 /* block specific CSS goes here */
-
 :root {
   --heading-font-size-xxl: 2.1875rem;
   --heading-font-size-m: 18px;
@@ -48,7 +47,8 @@ main .hero p:not([class*="button"]) {
   font-weight: 100;
   margin-top: 0;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-m)
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
 }
 
 main .hero .button-container {
