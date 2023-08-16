@@ -181,7 +181,8 @@ footer .footer .footer-heading-section li:has(.icon) {
 
   footer .footer .footer-heading-wrapper {
     display: flex;
-    gap: 16px;
+    gap: 8px;
+    justify-content: space-between;
   }
 
   footer .footer li,
@@ -225,3 +226,14 @@ footer .footer .footer-heading-section li:has(.icon) {
   }
 }
 
+@media (min-width: 900px) {
+  footer .footer .footer-heading-wrapper {
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1000px) {
+  footer .footer .footer-heading-wrapper {
+    gap: 16px;
+  }
+}
