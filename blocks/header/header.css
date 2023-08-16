@@ -280,6 +280,14 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   top: 28px;
 }
 
+header nav .nav-sections .nav-drop a.icon-arrow {
+  display: none;
+}
+
+header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
+  display: none;
+}
+
 @media (min-width: 768px) {
   header nav .nav-sections {
     order: 2;
@@ -346,14 +354,33 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   }
 
   header nav .nav-sections .nav-drop::after {
-    top: 12px;
-    right: 20px;
+    display: none;
   }
 
   header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
+    display: none;
+  }
+
+  header nav .nav-sections .nav-drop a.icon-arrow {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    transform: rotate(135deg);
+    width: 5px;
+    height: 5px;
+    border-style: solid;
+    border-color: currentcolor;
+    border-radius: 0 1px 0 0;
+    border-width: 1.5px 1.5px 0 0;
+    transition: 0.2s;
+  }
+
+  header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
+    display: inline-block;
     transform: rotate(315deg);
     top: 16px;
-    right: 20px;
   }
 }
 

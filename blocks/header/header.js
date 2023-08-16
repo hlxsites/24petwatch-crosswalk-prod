@@ -4,18 +4,19 @@ let positionY = 0;
 const SCROLL_STEP = 25;
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 768px)');
+const isTablet = window.matchMedia('(min-width: 768px)');
+const isDesktop = window.matchMedia('(min-width: 900px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
+    if (navSectionExpanded && isTablet.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
+    } else if (!isTablet.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
@@ -74,7 +75,7 @@ function toggleMenu(nav, navSections, closeAll = null) {
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
+  if (isTablet.matches) {
     navDrops.forEach((drop) => {
       if (!drop.hasAttribute('tabindex')) {
         drop.setAttribute('role', 'button');
@@ -90,7 +91,7 @@ function toggleMenu(nav, navSections, closeAll = null) {
     });
   }
   // enable menu collapse on escape keypress
-  if (!expanded || isDesktop.matches) {
+  if (!expanded || isTablet.matches) {
     // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
   } else {
@@ -109,18 +110,18 @@ function decorateLanguageSelector(block) {
 
   languageSelector.setAttribute('aria-expanded', 'false');
   languageSelector.addEventListener('click', () => {
-    if (!isDesktop.matches) {
+    if (!isTablet.matches) {
       const expanded = languageSelector.getAttribute('aria-expanded') === 'true';
       languageSelector.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     }
   });
   languageSelector.addEventListener('mouseenter', () => {
-    if (isDesktop.matches) {
+    if (isTablet.matches) {
       languageSelector.setAttribute('aria-expanded', 'true');
     }
   });
   languageSelector.addEventListener('mouseleave', () => {
-    if (isDesktop.matches) {
+    if (isTablet.matches) {
       languageSelector.setAttribute('aria-expanded', 'false');
     }
   });
@@ -155,7 +156,16 @@ export default async function decorate(block) {
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+        if (navSection.querySelector('ul')) {
+          navSection.classList.add('nav-drop');
+          const dropdownAnchor = document.createElement('a');
+          dropdownAnchor.href = "#";
+          dropdownAnchor.classList.add('icon-arrow');
+          dropdownAnchor.addEventListener('click', (e) => {
+            e.preventDefault();
+          });
+          navSection.append(dropdownAnchor);
+        }
         navSection.addEventListener('click', () => {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -183,8 +193,8 @@ export default async function decorate(block) {
     nav.prepend(hamburger);
     nav.setAttribute('aria-expanded', 'false');
     // prevent mobile nav behavior on window resize
-    toggleMenu(nav, navSections, isDesktop.matches);
-    isDesktop.addEventListener('change', () => closeAllMenus(nav, navSections));
+    toggleMenu(nav, navSections, isTablet.matches);
+    isTablet.addEventListener('change', () => closeAllMenus(nav, navSections));
 
     // language selector
     const secondaryMenu = nav.querySelector('.nav-secondary');

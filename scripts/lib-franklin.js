@@ -576,6 +576,11 @@ export function decorateButtons(element) {
         }
       }
     }
+
+    // open non (www)?.24petwatch.com pages in new tab
+    if (!/^https:\/\/(www\.)?24petwatch.com/.test(a.href)) {
+      a.target = '_blank';
+    }
   });
 }
 
