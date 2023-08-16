@@ -50,6 +50,7 @@
   --link-color: #007680;
   --link-hover-color: #23527c;
   --background-color: #fff;
+  --background-color-secondary: #e7e9ea;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #333f48;
@@ -62,6 +63,7 @@
   --footer-background-color: #333f48;
   --footer-list-background-color: #e7e9ea;
   --footer-font-color: #fff;
+  --nav-secondary-color: e5e5e5;
 
   /* fonts */
   --body-font-family: 'FSMePro', fsmepro-normal-400-fallback, arial, helvetica, sans-serif;
@@ -93,7 +95,8 @@
   --heading-font-weight: 400;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 95px;
+  --header-height: var(--nav-height);
 }
 
 @media (min-width: 768px) {
@@ -109,6 +112,22 @@
     --heading-line-height-xl: 3.125rem;
     --heading-line-height-l: 2.813rem;
     --heading-line-height-m: 2.25rem;
+
+    /* nav height */
+    --nav-height: 95px;
+    --header-height: calc(44px + var(--nav-height));
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-height: 119px;
+  }
+}
+
+@media (min-width: 1300px) {
+  :root {
+    --nav-height: 95px;
   }
 }
 
@@ -128,7 +147,7 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  height: var(--header-height);
 }
 
 h1, h2, h3,
