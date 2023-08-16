@@ -1,9 +1,9 @@
-:root {
+.cards {
   --heading-font-size-m: 1rem;
 }
 
 @media (min-width: 768px) {
-  :root {
+  .cards {
     --heading-font-size-m: 1.3125rem;
     --heading-line-height-m: 1.938rem;
   }
