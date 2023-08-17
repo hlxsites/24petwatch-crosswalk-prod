@@ -21,7 +21,7 @@ function createBlogCard(item = {}) {
   const blogUrl = `${host}${item.url.substring(item.url.indexOf('/blog')).replace('.html', '')}`;
 
   return `<div>
-            <picture><img loading="lazy" alt="" src="${blogThumbnail}"></picture>
+            <picture><img loading="lazy" alt="${item.name}" src="${blogThumbnail}"></picture>
         </div>
         <div>
             <h4>${item.name}</h4>
