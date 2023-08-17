@@ -386,7 +386,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
 
 @media (min-width: 1000px) {
   header nav .nav-sections {
-    max-width: 734px;
+    max-width: 728px;
   }
 
   header nav .nav-sections > ul > li {
@@ -401,7 +401,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
 
 @media (min-width: 1300px) {
   header nav .nav-sections {
-    min-width: 829px;
+    min-width: 818px;
   }
 
   header nav .nav-sections > ul > li {
@@ -428,7 +428,7 @@ header nav .nav-get-quote .button-container > strong > a {
 @media (min-width: 768px) {
   header nav .nav-get-quote {
     order: 3;
-    width: 133px;
+    width: 144px;
   }
 
   header nav .nav-get-quote .button-container > strong > a {
