@@ -1,4 +1,4 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
+import {readBlockConfig, decorateIcons, decorateLinks} from '../../scripts/lib-franklin.js';
 
 /**
  * loads and decorates the footer
@@ -27,7 +27,8 @@ export default async function decorate(block) {
     container.forEach((div) => {
       div.classList.add('footer-container');
       const headings = div.querySelectorAll('h1, h2, h3, h4');
-      const logos = div.querySelectorAll('p:has(picture)');
+      const logos = [...div.querySelectorAll('p > picture')]
+        .map((picture) => picture.parentElement);
 
       if (headings.length > 0) {
         const headingWrapper = document.createElement('div');
@@ -83,6 +84,7 @@ export default async function decorate(block) {
     });
 
     decorateIcons(footer);
+    decorateLinks(footer);
     block.append(footer);
   }
 }

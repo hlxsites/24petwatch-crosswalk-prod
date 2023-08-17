@@ -576,7 +576,15 @@ export function decorateButtons(element) {
         }
       }
     }
+  });
+}
 
+/**
+ * Decorates anchor elements.
+ * @param {Element} element container element
+ */
+export function decorateLinks(element) {
+  element.querySelectorAll('a').forEach((a) => {
     // open non (www)?.24petwatch.com pages in new tab
     if (!/^https:\/\/(www\.)?24petwatch.com/.test(a.href)) {
       a.target = '_blank';

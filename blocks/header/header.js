@@ -1,4 +1,9 @@
-import { getMetadata, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
+import {
+  getMetadata,
+  decorateIcons,
+  decorateButtons,
+  decorateLinks
+} from '../../scripts/lib-franklin.js';
 
 let positionY = 0;
 const SCROLL_STEP = 25;
@@ -202,6 +207,7 @@ export default async function decorate(block) {
 
     decorateIcons(nav);
     decorateButtons(nav);
+    decorateLinks(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
