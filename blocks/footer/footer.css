@@ -70,7 +70,7 @@ footer .footer ul {
 }
 
 footer .footer .footer-heading-section ul {
-  margin: 1.25rem 0 0;
+  margin: 0.5rem 0 0;
   padding-left: 0;
   font-family: var(--heading-font-family);
   font-style: normal;
@@ -157,6 +157,11 @@ footer .footer .footer-heading-section li {
 footer .footer .footer-heading-section:has(h2) li,
 footer .footer .footer-heading-section:has(h2) a {
   color: var(--footer-font-color);
+  white-space: nowrap;
+}
+
+footer .footer .footer-heading-section:first-of-type li {
+  padding: 11px 0 15px 8px;
 }
 
 footer .footer .footer-heading-section:has(h3) ul,

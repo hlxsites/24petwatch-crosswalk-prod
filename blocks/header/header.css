@@ -429,12 +429,19 @@ header nav .nav-get-quote .button-container > strong > a {
   header nav .nav-get-quote {
     order: 3;
     width: 144px;
+    margin-left: 8px;
   }
 
   header nav .nav-get-quote .button-container > strong > a {
     font-size: 1rem;
     padding: 1rem 1.5rem;
     white-space: nowrap;
+  }
+}
+
+@media (min-width: 1300px) {
+  header nav .nav-get-quote {
+    margin: 0;
   }
 }
 
