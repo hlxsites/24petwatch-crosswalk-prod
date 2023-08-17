@@ -165,6 +165,7 @@ export default async function decorate(block) {
           navSection.classList.add('nav-drop');
           const dropdownAnchor = document.createElement('a');
           dropdownAnchor.href = '#';
+          dropdownAnchor.ariaLabel = 'Open dropdown menu';
           dropdownAnchor.classList.add('icon-arrow');
           dropdownAnchor.addEventListener('click', (e) => {
             e.preventDefault();
