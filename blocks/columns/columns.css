@@ -9,7 +9,7 @@
 }
 
 .columns img {
-  max-height: 64px;
+  max-height: min(calc(7vw - 1px), 100px);
   width: auto;
 }
 
@@ -48,10 +48,6 @@
 
   .columns > div > .columns-img-col {
     order: unset;
-  }
-
-  .columns img {
-    max-height: 80px;
   }
 
   .columns h2 {
