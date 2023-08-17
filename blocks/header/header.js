@@ -171,7 +171,9 @@ export default async function decorate(block) {
           });
           navSection.append(dropdownAnchor);
         }
-        navSection.addEventListener('click', () => {
+        navSection.addEventListener('click', (e) => {
+          if (!isTablet.matches && !isDesktop.matches && e.target.tagName === 'A') return;
+
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         });

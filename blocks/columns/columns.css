@@ -10,6 +10,7 @@
 
 .columns img {
   max-height: min(calc(7vw - 1px), 100px);
+  min-height: 40px;
   width: auto;
 }
 

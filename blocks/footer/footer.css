@@ -226,6 +226,10 @@ footer .footer .footer-heading-section li a span.icon {
     flex-direction: row;
   }
 
+  footer .footer .footer-logo > p:first-of-type img {
+    max-height: 30px;
+  }
+
   footer .footer .collapsed {
     display: block;
   }
