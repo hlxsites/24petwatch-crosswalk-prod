@@ -2,7 +2,7 @@ import {
   getMetadata,
   decorateIcons,
   decorateButtons,
-  decorateLinks
+  decorateLinks,
 } from '../../scripts/lib-franklin.js';
 
 let positionY = 0;
@@ -164,7 +164,7 @@ export default async function decorate(block) {
         if (navSection.querySelector('ul')) {
           navSection.classList.add('nav-drop');
           const dropdownAnchor = document.createElement('a');
-          dropdownAnchor.href = "#";
+          dropdownAnchor.href = '#';
           dropdownAnchor.classList.add('icon-arrow');
           dropdownAnchor.addEventListener('click', (e) => {
             e.preventDefault();
