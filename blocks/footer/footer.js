@@ -68,6 +68,12 @@ export default async function decorate(block) {
             currentSection.appendChild(heading);
             currentSection.appendChild(nextSibling);
             headingWrapper.appendChild(currentSection);
+
+            [...currentSection.querySelectorAll('span.icon')].forEach((icon) => {
+              if (icon.nextElementSibling.tagName === 'A') {
+                icon.nextElementSibling.prepend(icon);
+              }
+            });
           }
         });
         footer.appendChild(headingWrapper);

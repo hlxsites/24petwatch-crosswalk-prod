@@ -41,8 +41,8 @@ footer .footer p {
 }
 
 footer .footer .footer-heading-section .icon {
-  height: 14px;
-  width: 14px;
+  height: 10px;
+  width: 13px;
 }
 
 footer .footer .footer-logo  {
@@ -168,6 +168,10 @@ footer .footer .footer-heading-section li:has(.icon) {
   display: flex;
   align-items: center;
   gap: 7px;
+}
+
+footer .footer .footer-heading-section li a span.icon {
+  margin-right: 4px;
 }
 
 @media (min-width: 768px) {
