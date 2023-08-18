@@ -42,6 +42,11 @@ footer .footer .footer-heading-section .icon {
   width: 13px;
 }
 
+footer .footer .footer-heading-section a[href$="pdf"] .icon {
+  height: 14px;
+  width: 14px;
+}
+
 footer .footer .footer-logo  {
   display: flex;
   flex-direction: column;
