@@ -157,6 +157,7 @@ footer .footer .footer-heading-section li {
 }
 
 footer .footer .footer-heading-section.h2-container li,
+footer .footer .footer-container a,
 footer .footer .footer-heading-section.h2-container a {
   color: var(--footer-font-color);
   white-space: nowrap;
