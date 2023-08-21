@@ -12,6 +12,8 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 import {
@@ -19,6 +21,7 @@ import {
   createInlineScript,
   getAlloyInitScript,
   setupAnalyticsTrackingWithAlloy,
+  analyticsTrackLinkClicks,
 } from './lib-analytics.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -82,6 +85,46 @@ async function loadEager(doc) {
   }
 }
 
+async function initializeConversionTracking() {
+  const context = {
+    getMetadata,
+    toClassName,
+  };
+  // eslint-disable-next-line import/no-relative-packages
+  const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
+  await initConversionTracking.call(context, document);
+
+  let conversionEvent;
+
+  // call upon conversion events, sends them to alloy
+  sampleRUM.always.on('convert', async (data) => {
+    const { element } = data;
+    // eslint-disable-next-line no-undef
+    if (element && alloy) {
+      // form tracking related logic should be added here if need be.
+      // see https://github.com/adobe/franklin-rum-conversion#integration-with-analytics-solutions
+      if (element.tagName === 'A') {
+        conversionEvent = {
+          event: 'Link Click',
+          ...(data.source ? { conversionName: data.source } : {}),
+          ...(data.target ? { conversionValue: data.target } : {}),
+        };
+        analyticsTrackLinkClicks(element, 'other', {
+          conversion: {
+            ...(conversionEvent.conversionName
+              ? { conversionName: `${conversionEvent.conversionName}` }
+              : {}),
+            ...(conversionEvent.conversionValue
+              ? { conversionValue: `${conversionEvent.conversionValue}` }
+              : {}),
+          },
+        });
+        conversionEvent = undefined;
+      }
+    }
+  });
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -104,6 +147,7 @@ async function loadLazy(doc) {
 
   await setupAnalyticsTrackingWithAlloy(document);
   analyticsSetConsent(true);
+  await initializeConversionTracking();
 }
 
 /**
