@@ -107,6 +107,42 @@ const createHero = (main, document, newMain) => {
 
 };
 
+const createColumns = (main, document, newMain) => {
+  
+  const columns = main.querySelectorAll('div.teaser');
+
+  if (columns) {
+
+    const cols = [];
+
+    for ( let i = 0; i < columns.length; i += 1) {
+      const div = document.createElement('div');
+      const img = document.createElement('img');
+      const p = document.createElement('p');
+
+      const imgSrc = columns[i].querySelector('img').getAttribute('src');
+      img.setAttribute('src', imgSrc);
+      
+      const text = columns[i].querySelector('h4').textContent;
+      p.textContent = text;
+      
+      div.append(img);
+      div.append(p);
+      cols.push(div);
+    }
+  
+    const cells = [
+      ['Columns'],
+      cols,
+    ];
+  
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    newMain.append(block);
+
+  }
+
+};
+
 const createCards = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     const cards = [];
@@ -404,6 +440,7 @@ export default {
     const newMain = document.createElement('main');
     createFullLayoutSection(main, document);
     createHero(main, document, newMain);
+    createColumns(main, document, newMain);
     createCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
