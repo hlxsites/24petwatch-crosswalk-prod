@@ -101,8 +101,7 @@ const createHero = (main, document, newMain) => {
     ];
 
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    newMain.append(block);
-    //hero.append(block);
+    hero.replaceWith(block);
   }
 
 };
@@ -138,7 +137,7 @@ const createColumns = (main, document, newMain) => {
   
     if (cols.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
-      newMain.append(block);
+      columns.replaceWith(block);
     }
   }
 
@@ -440,8 +439,8 @@ export default {
     const main = document.body;
     const newMain = document.createElement('main');
     createFullLayoutSection(main, document);
-    createHero(main, document, newMain);
-    createColumns(main, document, newMain);
+    createHero(main, document);
+    createColumns(main, document);
     createCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
@@ -455,15 +454,16 @@ export default {
     }
 
     // use helper method to remove header, footer, etc.
-    WebImporter.DOMUtils.remove(newMain, [
+    WebImporter.DOMUtils.remove(main, [
       'header',
       'footer',
       'component',
+      'mainContent',
     ]);
 
     // create the metadata block and append it to the main element
-    createMetadata(newMain, document);
-    return newMain;
+    createMetadata(main, document);
+    return document.body;
   },
 
   /**
