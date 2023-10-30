@@ -1,25 +1,37 @@
 const createHeader = async (main, document) => {
-    const danaherHeaderEl = main.querySelector('danaher-header');
-    if (danaherHeaderEl) {
-      const templates = Array.from(danaherHeaderEl.getElementsByTagName('template'));
-      // eslint-disable-next-line no-restricted-syntax
-      for await (const t of templates) {
-        const brandNavigationEl = t.content.querySelector('brand-navigation');
-        if (brandNavigationEl) {
-          createBrandNavigation(brandNavigationEl, document, main);
-        }
-  
-        const navBarEl = t.content.querySelector('navbar');
-        if (navBarEl) {
-          createNavBar(navBarEl, main, document);
-        }
-  
-        const megaMenuHoverEl = t.content.querySelector('megamenuhover');
-        if (megaMenuHoverEl) {
-          await createMegaMenu(megaMenuHoverEl, main, document);
-        }
-      }
-    }
-  };
+  const header = main.querySelector('div.page-header');
+  console.log('header');
+  if (header) {
+    console.log('here');
+    const logo = document.createElement('span');
+    logo.classList.add('icon');
+    logo.classList.add('icon-logo');
+    logo.textContent = 'Logo';
+    main.append(logo)
 
+    main.append(document.createElement('hr'));
+
+    const strong = document.createElement('strong');
+    strong.append(document.querySelector('div.page-header__get-quote'))
+    main.append(strong);
+
+    main.append(document.createElement('hr'));
+
+    main.append(document.querySelector('ul.cmp-navigation__group'));
+
+    main.append(document.createElement('hr'));
+
+    const ul = document.createElement('ul');
+    document.querySelectorAll('div.page-header__notificationBar > div > div').forEach(element => {
+      if (!element.classList.contains('languagenavigation')) {
+        const li = document.createElement('li');
+        li.append(element);
+        ul.append(li);
+      }
+    });
+    main.append(ul);
+
+    header.innerHTML = '';
+  };
+};
 export default createHeader;

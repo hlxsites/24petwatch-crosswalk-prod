@@ -14,6 +14,12 @@ function processEntry (entry, main, document) {
 
 
 const createFooter = (main, document) => {
+    const footer = main.querySelector('footer');
+
+    if (!footer) {
+        return;
+    }
+    
     main.querySelectorAll('#footer-labels > div.aem-Grid > div.aem-GridColumn').forEach((e) => {
         let isAccordion = false;
         e.querySelectorAll('div.cmp-accordion__item').forEach((e) => {
