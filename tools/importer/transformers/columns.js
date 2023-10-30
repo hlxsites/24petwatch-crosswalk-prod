@@ -1,4 +1,4 @@
-const createColumns = (main, document, newMain) => {
+const createColumns = (main, document) => {
   
     const columns = main.querySelectorAll('div.teaser');
   
@@ -29,7 +29,8 @@ const createColumns = (main, document, newMain) => {
     
       if (cols.length > 0) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
-        columns.replaceWith(block);
+        main.append(block);
+        main.append(document.createElement('hr'));
       }
     }
   
