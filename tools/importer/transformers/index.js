@@ -12,7 +12,7 @@ import createWeSee from "./weSee.js";
 export const transformers = [
     createFullLayoutSection,
     createHero,
-    createColumns,
+    //createColumns,
     createCards,
     createLogoCloud,
     createWeSee,
