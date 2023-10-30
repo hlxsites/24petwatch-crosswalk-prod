@@ -1,9 +1,9 @@
 import createCards from "./cards.js";
-import createColumns from "./columns.js";
+import createTeaser from "./teaser.js";
 import createFeatureImage from "./featureImage.js";
 import createFooter from "./footer.js";
 import createFullLayoutSection from "./FullLayoutSection.js";
-import createGrids from "./grid.js";
+import createHomepage from "./homepage.js";
 import createHeader from "./header.js";
 import createHero from "./hero.js";
 import createLogoCloud from "./logoCloud.js";
@@ -13,8 +13,7 @@ import createWeSee from "./weSee.js";
 export const transformers = [
     createFullLayoutSection,
     createHero,
-    createColumns,
-    createGrids,
+    createHomepage,
     createCards,
     createLogoCloud,
     createWeSee,

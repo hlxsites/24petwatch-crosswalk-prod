@@ -1,39 +1,127 @@
-const createColumns = (main, document) => {
-  
-    const columns = main.querySelectorAll('div.teaser');
-  
-    if (columns) {
-  
-      const cols = [];
-  
-      for ( let i = 0; i < columns.length; i += 1) {
+function createColumns(currentBlock, main, document) {
+    let cols = currentBlock.querySelectorAll('div.aem-GridColumn--default--6');
+
+    let newCols = [];
+    for (let i = 0; i < cols.length; i += 1) {
+
         const div = document.createElement('div');
-        const img = document.createElement('img');
-        const p = document.createElement('p');
-  
-        const imgSrc = columns[i].querySelector('img').getAttribute('src');
-        img.setAttribute('src', imgSrc);
-        
-        const text = columns[i].querySelector('h4').textContent;
-        p.textContent = text;
-        
-        div.append(img);
-        div.append(p);
-        cols.push(div);
-      }
-    
-      const cells = [
-        ['Columns'],
-        cols,
-      ];
-    
-      if (cols.length > 0) {
-        const block = WebImporter.DOMUtils.createTable(cells, document);
-        main.append(block);
-        main.append(document.createElement('hr'));
-      }
+
+        // H1 heading
+        if (cols[i].querySelector('h1')) {
+            const h1 = document.createElement('h1');
+            h1.textContent = cols[i].querySelector('h1').textContent;
+            div.append(h1);
+        }
+
+        // H2 heading
+        if (cols[i].querySelector('h2')) {
+            const h2 = document.createElement('h2');
+            h2.textContent = cols[i].querySelector('h2').textContent;
+            div.append(h2);
+        }
+
+        // H4 heading
+        if (cols[i].querySelector('h4')) {
+            const h4 = document.createElement('h4');
+            h4.textContent = cols[i].querySelector('h4').textContent;
+            div.append(h4);
+        }
+
+        // paragraphs
+        if (cols[i].querySelector('p')) {
+            const p = document.createElement('p');
+            p.textContent = cols[i].querySelector('p').textContent;
+            div.append(p);
+        }
+
+        // image
+        if (cols[i].querySelector('img')) {
+            const img = document.createElement('img');
+            const imgSrc = cols[i].querySelector('img').getAttribute('src');
+            img.setAttribute('src', imgSrc);
+            div.append(img);
+        }
+
+        // CTA button
+        if (cols[i].querySelector('.cmp-button')) {
+            const cta = document.createElement('a');
+            const ctaHref = cols[i].querySelector('a').getAttribute('href');
+            const ctaText = cols[i].querySelector('.cmp-button').textContent;
+            cta.setAttribute('href', ctaHref);
+            cta.textContent = ctaText;
+
+            // If link opens in a new window, render it in bold
+            if (cols[i].querySelector('.cmp-button').getAttribute('target') === '_blank') {
+                const strong = document.createElement('strong');
+                strong.append(cta);
+                div.append(strong);
+                console.log(i);
+                console.log('strong')
+                console.log(cols[i].querySelector('.cmp-button').getAttribute('target'));
+            }
+            // If link opens in current window, render it as normal
+            else {
+                div.append(cta);
+                console.log(i);
+                console.log('not strong');
+                console.log(cols[i].querySelector('.cmp-button').getAttribute('target'));
+                console.log(cols[i].querySelector('.cmp-button').getAttribute('target'));
+                console.log(cols[i].querySelector('.cmp-button').hasAttribute('target'));
+            }
+        }
+
+        // Check if current and next nodes are siblings and if so, add current node to grid, otherwise output current grid
+        // First see if next element exists and if not print grid as-is
+        if (i + 1 >= cols.length) {
+            newCols.push(div);
+            // Build array for columns
+            const cells = [
+                ['Columns'],
+                newCols,
+            ];
+
+            const block = WebImporter.DOMUtils.createTable(cells, document);
+            main.append(block);
+        }
+        // Check if the next node and current are siblings, if so, just add column to array to add it them to the same grid
+        else if (cols[i].parentNode === cols[i + 1].parentNode) {
+            newCols.push(div);
+        }
+        // Otherwise the current node and next aren't siblings, so print out array and start a new grid
+        else {
+            newCols.push(div);
+            // Build array for columns
+            const cells = [
+                ['Columns'],
+                newCols,
+            ];
+
+            const block = WebImporter.DOMUtils.createTable(cells, document);
+            main.append(block);
+
+            // Reset columns array to an empty one to start a new grid
+            newCols = [];
+        }
     }
-  
-  };
+}
+
+
+function createSection(currentBlock, main, document) {
+
+    //const cols = currentBlock.querySelectorAll('div.aem-GridColumn--default--6');
+    const grid = currentBlock.querySelector('div.aem-Grid div.aem-GridColumn--default--6')
+    
+    if (currentBlock.textContent.trim() === '') {
+        return;
+    }
+
+    if (grid) {
+        createColumns(currentBlock, main, document);
+    } else {
+        main.append(currentBlock);
+    }
+
+    main.append(document.createElement('hr'));
+}
 
 export default createColumns;
