@@ -36,8 +36,6 @@ export async function render(path, params, cfg = converterCfg) {
 
   const resp = await fetch(url, { headers });
 
-
-  console.log(`Error fetching ${url}: ${resp.status} ${resp.statusText}`);
   if (!resp.ok) {
     console.log(`Error fetching ${url}: ${resp.status} ${resp.statusText}`);
     return { error: { code: resp.status, message: resp.statusText } };
