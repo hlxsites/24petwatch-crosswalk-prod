@@ -21,6 +21,22 @@ function createSection(currentBlock, main, document) {
         createColumns(currentBlock, main, document);
     }
 
+    // Add metadata to end of section
+    // Get metadata from background color defined in class of the block
+    for (let i=0; i<currentBlock.classList.length; i+=1){
+        // Iterate over block classes to find background class
+        if (currentBlock.classList[i].match('cmp-container--bg*')){
+            const cells = [
+                ['Section Metadata'],
+                ['Style', currentBlock.classList[i].substring(17)],
+              ];
+          
+              const metadata = WebImporter.DOMUtils.createTable(cells, document);
+              main.append(metadata);
+            break;
+        }
+    }
+
     main.append(document.createElement('hr'));
 }
 // Generalize creating columns from grids
