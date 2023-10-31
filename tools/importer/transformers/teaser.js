@@ -30,7 +30,6 @@ const createTeaser = (main, document) => {
       if (cols.length > 0) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         main.append(block);
-        main.append(document.createElement('hr'));
       }
     }
   
