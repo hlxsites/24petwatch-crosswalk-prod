@@ -1,11 +1,11 @@
 function createCarousel(currentBlock, main, document) {
     console.log('Carousel found!')
     let carouselItems = currentBlock.querySelectorAll('div.cmp-carousel__item');
-    const text = document.createElement('div');
-    const image = document.createElement('div');
-    let carousel = ['Carousel'];
+    let carousel = [['Carousel']];
 
     for (let i = 0; i < carouselItems.length; i += 1) {
+        const text = document.createElement('div');
+        const image = document.createElement('div');
 
         let carouselItem = [];
     
