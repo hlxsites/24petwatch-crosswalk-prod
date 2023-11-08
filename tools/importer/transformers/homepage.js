@@ -1,3 +1,4 @@
+import createCarousel from './carousel';
 import createColumns from './columns';
 import createTeaser from './teaser';
 
@@ -14,6 +15,11 @@ function createSection(currentBlock, main, document) {
     const teaser = currentBlock.querySelector('div.teaser');
     if (teaser) {
         createTeaser(main, document);
+    }
+
+    const carousel = currentBlock.querySelector('div.carousel')
+    if (carousel) {
+        createCarousel(currentBlock, main, document);
     }
 
     const grid = currentBlock.querySelector('div.aem-Grid div.aem-GridColumn')
