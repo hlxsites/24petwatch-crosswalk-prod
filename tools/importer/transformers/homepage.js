@@ -6,7 +6,7 @@ function createSection(currentBlock, main, document) {
         return;
     }
 
-    const headers = currentBlock.querySelector('div.headers');
+    const headers = currentBlock.querySelector('div.headers.aem-GridColumn--default--12');
     if (headers) {
         main.append(headers);
     }
