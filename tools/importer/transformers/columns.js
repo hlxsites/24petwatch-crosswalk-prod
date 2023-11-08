@@ -1,89 +1,100 @@
 function createColumns(currentBlock, main, document) {
+    
     let cols = currentBlock.querySelectorAll('div.aem-GridColumn--default--6');
-
+    const text = document.createElement('div');
+    const image = document.createElement('div');
+    let content = false;
+    let textPos = 0;
+    let imagePos = 0;
     let newCols = [];
+
     for (let i = 0; i < cols.length; i += 1) {
 
-        const div = document.createElement('div');
+        // Headers
+        if (cols[i].querySelector('div.headers') )
+        {
+            // H1 heading
+            if (cols[i].querySelector('h1')) {
+                const h1 = document.createElement('h1');
+                h1.textContent = cols[i].querySelector('h1').textContent;
+                text.append(h1);
+                content = true;
+                textPos = i;
+            }
 
-        // H1 heading
-        if (cols[i].querySelector('h1')) {
-            const h1 = document.createElement('h1');
-            h1.textContent = cols[i].querySelector('h1').textContent;
-            div.append(h1);
+            // H2 heading
+            if (cols[i].querySelector('h2')) {
+                const h2 = document.createElement('h2');
+                h2.textContent = cols[i].querySelector('h2').textContent;
+                text.append(h2);
+                content = true;
+                textPos = i;
+            }
+
+            // H4 heading
+            if (cols[i].querySelector('h4')) {
+                const h4 = document.createElement('h4');
+                h4.textContent = cols[i].querySelector('h4').textContent;
+                text.append(h4);
+                content = true;
+                textPos = i;
+            }
         }
 
-        // H2 heading
-        if (cols[i].querySelector('h2')) {
-            const h2 = document.createElement('h2');
-            h2.textContent = cols[i].querySelector('h2').textContent;
-            div.append(h2);
-        }
-
-        // H4 heading
-        if (cols[i].querySelector('h4')) {
-            const h4 = document.createElement('h4');
-            h4.textContent = cols[i].querySelector('h4').textContent;
-            div.append(h4);
-        }
-
-        // paragraphs
-        if (cols[i].querySelector('p')) {
+        // Text
+        if (cols[i].querySelector('div.text')) {
             const p = document.createElement('p');
             p.textContent = cols[i].querySelector('p').textContent;
-            div.append(p);
+            text.append(p);
+            content = true;
+            textPos = i;
         }
 
-        // image
-        if (cols[i].querySelector('img')) {
+        // Content Fragment
+        if (cols[i].querySelector('div.experiencefragment')) {
             const img = document.createElement('img');
             const imgSrc = cols[i].querySelector('img').getAttribute('src');
             img.setAttribute('src', imgSrc);
-            div.append(img);
+            image.append(img);
+            content = true;
+            imagePos = i;
         }
 
         // CTA button
-        if (cols[i].querySelector('.cmp-button')) {
+        if (cols[i].querySelector('div.button')) {
             const cta = document.createElement('a');
             const ctaHref = cols[i].querySelector('a').getAttribute('href');
             const ctaText = cols[i].querySelector('.cmp-button').textContent;
             cta.setAttribute('href', ctaHref);
             cta.textContent = ctaText;
-        }
-
-        // Check if current and next nodes are siblings and if so, add current node to grid, otherwise output current grid
-        // First see if next element exists and if not print grid as-is
-        if (i + 1 >= cols.length) {
-            newCols.push(div);
-            // Build array for columns
-            const cells = [
-                ['Columns'],
-                newCols,
-            ];
-
-            const block = WebImporter.DOMUtils.createTable(cells, document);
-            main.append(block);
-        }
-        // Check if the next node and current are siblings, if so, just add column to array to add it them to the same grid
-        else if (cols[i].parentNode === cols[i + 1].parentNode) {
-            newCols.push(div);
-        }
-        // Otherwise the current node and next aren't siblings, so print out array and start a new grid
-        else {
-            newCols.push(div);
-            // Build array for columns
-            const cells = [
-                ['Columns'],
-                newCols,
-            ];
-
-            const block = WebImporter.DOMUtils.createTable(cells, document);
-            main.append(block);
-
-            // Reset columns array to an empty one to start a new grid
-            newCols = [];
+            text.append(cta);
+            content = true;
+            textPos = i;
         }
     }
+
+    // If content was found and created as a document element, build table and add to main
+    if (content) {
+        
+        let cells = [];
+
+        // Find if image should be to left or right of text
+        if ( imagePos > textPos ) {
+            cells = [
+                ['Cols'],
+                [text, image],
+            ];
+        }
+        else {
+            cells = [
+                ['Cols'],
+                [image,text],
+            ];
+        }
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        main.append(block);
+    }
+
 }
 
 

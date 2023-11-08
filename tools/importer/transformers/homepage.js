@@ -39,6 +39,7 @@ function createSection(currentBlock, main, document) {
 
     main.append(document.createElement('hr'));
 }
+
 // Generalize creating columns from grids
 //Extract all aem-Grid--12 that have aem-GridColumn--default--6
 // 12 is the container (100%) that holds two columns of 6 (50% each)
