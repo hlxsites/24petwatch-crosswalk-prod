@@ -4,7 +4,7 @@ const createHeader = async (main, document) => {
     const logo = document.createElement('span');
     logo.classList.add('icon');
     logo.classList.add('icon-logo');
-    logo.textContent = 'Logo';
+    logo.textContent = ':logo:';
     main.append(logo)
 
     main.append(document.createElement('hr'));
