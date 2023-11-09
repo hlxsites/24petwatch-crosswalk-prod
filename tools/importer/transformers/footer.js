@@ -14,7 +14,7 @@ function processEntry (entry, main, document) {
 
 
 const createFooter = (main, document) => {
-    const footer = main.querySelector('footer');
+    const footer = main.querySelector('div#footer');
 
     if (!footer) {
         return;
