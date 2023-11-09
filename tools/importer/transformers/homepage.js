@@ -1,6 +1,7 @@
 import createCarousel from './carousel';
 import createColumns from './columns';
 import createTeaser from './teaser';
+import createImageList from './imageList';
 
 function createSection(currentBlock, main, document) {
     if (currentBlock.textContent.trim() === '') {
@@ -25,6 +26,11 @@ function createSection(currentBlock, main, document) {
     const grid = currentBlock.querySelector('div.aem-Grid div.aem-GridColumn')
     if (!teaser && grid) {
         createColumns(currentBlock, main, document);
+    }
+
+    const imageList = currentBlock.querySelector('div.aem-Grid.aem-Grid--12.aem-Grid--default--12 ul.cmp-image-list__list');
+    if ( imageList ) {
+        createImageList(currentBlock, main, document);
     }
 
     // Add metadata to end of section
