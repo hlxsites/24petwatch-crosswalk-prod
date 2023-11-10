@@ -81,13 +81,13 @@ function createColumns(currentBlock, main, document) {
         // Find if image should be to left or right of text
         if ( imagePos > textPos ) {
             cells = [
-                ['Cols'],
+                ['Columns'],
                 [text, image],
             ];
         }
         else {
             cells = [
-                ['Cols'],
+                ['Columns'],
                 [image,text],
             ];
         }

@@ -3,6 +3,8 @@ const createTeaser = (main, document) => {
     const columns = main.querySelectorAll('div.teaser');
   
     if (columns) {
+
+      const centered = main.querySelector('div.cmp-container--aligncenter') !== null;
   
       const cols = [];
   
@@ -21,9 +23,14 @@ const createTeaser = (main, document) => {
         div.append(p);
         cols.push(div);
       }
-    
+
+      let columnsName = 'Columns';
+      if (centered) {
+        columnsName = 'Columns (text-center)';
+      }
+
       const cells = [
-        ['Columns'],
+        [columnsName],
         cols,
       ];
     

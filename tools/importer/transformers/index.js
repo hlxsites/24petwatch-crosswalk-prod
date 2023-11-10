@@ -9,8 +9,10 @@ import createHero from "./hero.js";
 import createLogoCloud from "./logoCloud.js";
 import createMetadata from "./metadata.js";
 import createWeSee from "./weSee.js";
+import createBold from "./bold.js";
 
 export const transformers = [
+    createBold,
     createFullLayoutSection,
     createHero,
     createHomepage,
