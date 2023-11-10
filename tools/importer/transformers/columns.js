@@ -62,12 +62,14 @@ function createColumns(currentBlock, main, document) {
 
         // CTA button
         if (cols[i].querySelector('div.button')) {
+            const button = document.createElement('strong');
             const cta = document.createElement('a');
             const ctaHref = cols[i].querySelector('a').getAttribute('href');
             const ctaText = cols[i].querySelector('.cmp-button').textContent;
             cta.setAttribute('href', ctaHref);
             cta.textContent = ctaText;
-            text.append(cta);
+            button.append(cta);
+            text.append(button);
             content = true;
             textPos = i;
         }
