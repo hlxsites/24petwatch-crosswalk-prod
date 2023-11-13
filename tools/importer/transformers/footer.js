@@ -14,7 +14,7 @@ function processEntry (entry, main, document) {
 
 
 const createFooter = (main, document) => {
-    const footer = main.querySelector('footer');
+    const footer = main.querySelector('div#footer');
 
     if (!footer) {
         return;
@@ -40,9 +40,17 @@ const createFooter = (main, document) => {
 
     main.append(document.createElement('hr'));
 
-    main.querySelectorAll('div#footer-links-container a').forEach((link) => {
-        main.append(link);
-    });
+    const linkContainer = main.querySelectorAll('div#footer-links-container a')
+    
+    if (linkContainer) {
+        const ul = document.createElement('ul')
+        linkContainer.forEach((link) => {
+            const li = document.createElement('li')
+            li.append(link)
+            ul.append(li)
+        });
+        main.append(ul)
+    }
 
     main.append(main.querySelector('div#footer-notice-global'))
 };

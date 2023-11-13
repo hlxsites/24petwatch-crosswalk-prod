@@ -349,20 +349,20 @@ main .section {
 }
 
 /* section metadata */
-main .section.teal-bg {
+main .section.teal-bg, main .section.teal {
   background-color: #007680;
   color: white;
 }
 
-main .section.gray-bg {
+main .section.gray-bg, main .section.lightcool {
   background-color: #e7e9ea;
 }
 
-main .section.light-gray-bg {
+main .section.light-gray-bg, main .section.lightergray {
   background-color: #FBFBFB;
 }
 
-main .section.warm-white-bg {
+main .section.warm-white-bg, main .section.cream {
   background-color: #fff1d6;
 }
 

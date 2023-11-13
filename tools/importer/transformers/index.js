@@ -1,18 +1,21 @@
 import createCards from "./cards.js";
-import createColumns from "./columns.js";
+import createTeaser from "./teaser.js";
 import createFeatureImage from "./featureImage.js";
 import createFooter from "./footer.js";
 import createFullLayoutSection from "./FullLayoutSection.js";
+import createHomepage from "./homepage.js";
 import createHeader from "./header.js";
 import createHero from "./hero.js";
 import createLogoCloud from "./logoCloud.js";
 import createMetadata from "./metadata.js";
 import createWeSee from "./weSee.js";
+import createBold from "./bold.js";
 
 export const transformers = [
+    createBold,
     createFullLayoutSection,
     createHero,
-    //createColumns,
+    createHomepage,
     createCards,
     createLogoCloud,
     createWeSee,

@@ -53,7 +53,8 @@ const createHero = (main, document, newMain) => {
       ];
   
       const block = WebImporter.DOMUtils.createTable(cells, document);
-      hero.replaceWith(block);
+      main.append(block);
+      main.append(document.createElement('hr'));
     }
   
   };
