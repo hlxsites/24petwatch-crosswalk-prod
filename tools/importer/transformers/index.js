@@ -1,33 +1,28 @@
-import createCards from "./cards.js";
-import createTeaser from "./teaser.js";
-import createFeatureImage from "./featureImage.js";
-import createFooter from "./footer.js";
-import createFullLayoutSection from "./FullLayoutSection.js";
-import createHomepage from "./homepage.js";
-import createHeader from "./header.js";
-import createHero from "./hero.js";
-import createLogoCloud from "./logoCloud.js";
-import createMetadata from "./metadata.js";
-import createWeSee from "./weSee.js";
-import createBold from "./bold.js";
+import createCards from './cards.js';
+import createFeatureImage from './featureImage.js';
+import createFooter from './footer.js';
+import createFullLayoutSection from './fullLayoutSection.js';
+import createHomepage from './homepage.js';
+import createHeader from './header.js';
+import createHero from './hero.js';
+import createMetadata from './metadata.js';
+import createBold from './bold.js';
 
 export const transformers = [
-    createBold,
-    createFullLayoutSection,
-    createHero,
-    createHomepage,
-    createCards,
-    createLogoCloud,
-    createWeSee,
-    createFeatureImage,
+  createBold,
+  createFullLayoutSection,
+  createHero,
+  createHomepage,
+  createCards,
+  createFeatureImage,
 ];
 
 export const xfTransformers = [
-    createFooter,
+  createFooter,
 ];
 
 export const xfAsyncTransformers = [
-    createHeader,
+  createHeader,
 ];
 
 export const preTransformers = [
@@ -35,5 +30,5 @@ export const preTransformers = [
 ];
 
 export const postTransformers = [
-    createMetadata,
+  createMetadata,
 ];

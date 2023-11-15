@@ -56,7 +56,7 @@ export default {
       'div.cloudservice.testandtarget',
       'div.loader-wrapper',
       'div.cmp-page__skiptomaincontent',
-      'div#mainContent'
+      'div#mainContent',
     ]);
 
     // create the metadata block and append it to the main element
