@@ -1,0 +1,8 @@
+mappings:
+  - /content/24petwatch/us/en:/
+  - /content/experience-fragments/24petwatch/us/en/site/:/fragments/
+
+includes:
+  - /content/24petwatch/us/en
+  - /content/experience-fragments/24petwatch/us/en/site/header
+  - /content/experience-fragments/24petwatch/us/en/site/footer
