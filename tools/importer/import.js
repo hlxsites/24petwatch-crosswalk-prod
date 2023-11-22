@@ -13,6 +13,7 @@
 /* eslint-disable class-methods-use-this */
 
 // helix-importer-ui <-> node compatibility:
+
 import {
   xfTransformers, xfAsyncTransformers, transformers, postTransformers,
 } from './transformers/index.js';
@@ -57,12 +58,18 @@ export default {
       'div.loader-wrapper',
       'div.cmp-page__skiptomaincontent',
       'div#mainContent',
+      'div.page-header',
+      // Remove navigation from the beginning of blog entries as well as readmore-type teasers and blurb about 24petwatch at the end
+      'nav',
+      'div.imagelist',
+      'div.cmp-experiencefragment--blog-page-cta-component',
     ]);
 
     // create the metadata block and append it to the main element
     postTransformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
     );
+
     return main;
   },
 
