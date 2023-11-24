@@ -6,7 +6,7 @@ application:
       main:
         license: Apache-2.0
         actions:
-          convert-prod:
+          convert:
             function: convert/dist/main.js
             web: 'yes'
             runtime: 'nodejs:16'
