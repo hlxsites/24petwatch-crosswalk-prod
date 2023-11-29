@@ -58,11 +58,16 @@ export default async function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
 
+  let baseFooterUrl = '/fragments/footer/master';
+  if (window.location.hostname !== 'www.24petwatch.com') {
+    baseFooterUrl = 'https://main--24petwatch-crosswalk--hlxsites.hlx.live/fragments/footer/master';
+  }
+
   // fetch footer content
-  const footerPath = cfg.footer || '/fragments/footer/master';
+  const footerPath = cfg.footer || baseFooterUrl;
   const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
 
-  if (false) {
+  if (resp.ok) {
     const html = await resp.text();
 
     // decorate footer DOM
