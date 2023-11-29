@@ -1,0 +1,18 @@
+{
+  "total": 2,
+  "offset": 0,
+  "limit": 2,
+  "data": [
+    {
+      "url": "/fragments/header/master.plain.html",
+      "key": "access-control-allow-origin",
+      "value": "*"
+    },
+    {
+      "url": "/fragments/footer/master.plain.html",
+      "key": "access-control-allow-origin",
+      "value": "*"
+    }
+  ],
+  ":type": "sheet"
+}
