@@ -13,10 +13,17 @@ const createMetadata = (main, document) => {
     meta.Description = desc.content;
   }
 
-  const img = document.querySelector('[property="og:image"]');
-  if (img && img.content) {
+  const img = document.querySelector('body img:first-child');
+  if (img && img.src) {
     const el = document.createElement('img');
-    el.src = img.content;
+    el.src = img.src.replace('https://www.24petwatch.com', '');
+    meta.Image = el;
+  }
+
+  const metaImage = document.querySelector('[property="og:image"]');
+  if (metaImage) {
+    const el = document.createElement('img');
+    el.src = metaImage.content.replace('https://www.24petwatch.com', '');
     meta.Image = el;
   }
 
@@ -29,7 +36,9 @@ const createMetadata = (main, document) => {
   const blogTags = document.querySelectorAll('div.cmp-contentfragment__element--tag > dd.cmp-contentfragment__element-value');
   if (blogTags) {
     for (let i = 0; i < blogTags.length; i += 1) {
-      meta.Tags = blogTags[i].innerHTML.replace('<br>', ' ');
+      meta.Tags = blogTags[i].innerHTML.trim()
+        .replaceAll('24petwatch:newletter/topic/', '')
+        .replaceAll('<br>', ',');
     }
   }
 
@@ -42,6 +51,11 @@ const createMetadata = (main, document) => {
     for (let i = 0; i < articleLinks.length; i += 0) {
       meta.Related = articleLinks[i].getAttribute('href');
     }
+  }
+
+  const author = document.querySelector('div.cmp-contentfragment__element--byline dd');
+  if (author) {
+    meta.Author = author.textContent.trim().replace(/^By /, '');
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);

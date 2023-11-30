@@ -4,6 +4,13 @@ function createBlogArticle(main, document) {
   const dds = document.querySelectorAll('dd');
   if (dts) {
     for (let i = 0; i < dts.length; i += 1) {
+      if (dts[i].textContent === 'Byline') {
+        const span = document.createElement('em');
+        const authorText = dds[i].textContent.trim();
+        span.textContent = authorText;
+        dts[i].closest('article').appendChild(span);
+      }
+
       if (dts[i].textContent === 'Text') {
         const div = document.createElement('div');
         div.innerHTML = dds[i].innerHTML;
