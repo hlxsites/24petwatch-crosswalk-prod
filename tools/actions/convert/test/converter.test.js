@@ -9,42 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-env mocha */
 
-import assert from 'assert';
-import { readFile } from 'fs/promises';
-import { resolve } from 'path';
-import nock from 'nock';
-import { render } from '../src/index.js';
+import path from 'path';
+import { pipeline, toMocha } from 'crosswalk-converter';
+import converterCfg from '../../../../converter.yaml';
+import mappingCfg from '../../../../paths.yaml';
+import transform from '../../../importer/import.js';
 
-async function test(spec, scope) {
-  const html = await readFile(resolve(__testdir, 'fixtures', `${spec}.html`), 'utf-8');
-  scope
-    .get(`/${spec}.html`)
-    .reply(200, html);
-  const expected = await readFile(resolve(__testdir, 'fixtures', `${spec}-semantic.html`), 'utf-8');
-  const actual = await render(`/${spec}.html`, {}, {
-    env: {
-      publicURL: 'https://stage.lifesciences.danaher.com/',
-      aemURL: 'http://www.example.com',
-    },
-  });
-  assert.strictEqual(actual.html.trim(), expected.trim());
-}
-
-describe('Converter Tests', () => {
-  let scope;
-  beforeEach(() => {
-    scope = nock('http://www.example.com');
+describe('Converter', async () => {
+  // eslint-disable-next-line no-undef
+  const fixturesFolder = path.resolve(__testdir, 'fixtures');
+  const testRunner = pipeline().wrap(toMocha, {
+    transform,
+    converterCfg,
+    mappingCfg,
+    fixturesFolder,
   });
 
-  it('convert the footer html', async () => {
-    await test('footer', scope);
-  });
-  it('convert the header html', async () => {
-    await test('header', scope);
-  });
-  it('convert the en html', async () => {
-    await test('en', scope);
-  });
+  await testRunner();
 });

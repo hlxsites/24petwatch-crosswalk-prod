@@ -13,7 +13,6 @@
 /* eslint-disable class-methods-use-this */
 
 // helix-importer-ui <-> node compatibility:
-
 import {
   xfTransformers, xfAsyncTransformers, transformers, postTransformers,
 } from './transformers/index.js';
@@ -71,7 +70,6 @@ export default {
     postTransformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
     );
-
     return main;
   },
 
