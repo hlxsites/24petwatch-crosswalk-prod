@@ -13,9 +13,19 @@ let positionY = 0;
 const SCROLL_STEP = 25;
 
 const urls = {
-  'usa': {url: '/', name: 'US', icon: 'icon-flagusa', lang: 'en-US'},
-  'canada': {url:'/ca/', name: 'Canada', icon: 'icon-flagcanada', lang: 'en-CA'},
-}
+  usa: {
+    url: '/',
+    name: 'US',
+    icon: 'icon-flagusa',
+    lang: 'en-US',
+  },
+  canada: {
+    url: '/ca/',
+    name: 'Canada',
+    icon: 'icon-flagcanada',
+    lang: 'en-CA',
+  },
+};
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -110,11 +120,11 @@ function toggleMenu(nav, navSections, closeAll = null) {
 }
 
 function decorateLanguageSelector(block) {
-  let currentCountry = urls['usa'];
-  let alternateCountry = urls['canada'];
+  let currentCountry = urls.usa;
+  let alternateCountry = urls.canada;
   if (window.location.pathname.startsWith('/ca/')) {
-    currentCountry = urls['canada'];
-    alternateCountry = urls['usa'];
+    currentCountry = urls.canada;
+    alternateCountry = urls.usa;
   }
 
   const languageSelector = document.createElement('li');
@@ -123,6 +133,12 @@ function decorateLanguageSelector(block) {
       <ul>
         <li><a href="${alternateCountry.url}" hreflang="${alternateCountry.lang}" rel="alternate" title="${alternateCountry.name}"><span class="icon ${alternateCountry.icon}"></span>${alternateCountry.name}</a></li>
       </ul>`;
+
+  const secondaryMenu = block.querySelector(':scope > ul');
+  if (!secondaryMenu) {
+    const li = document.createElement('ul');
+    block.append(li);
+  }
   block.querySelector(':scope > ul').prepend(languageSelector);
 
   languageSelector.setAttribute('aria-expanded', 'false');
@@ -188,8 +204,12 @@ export default async function decorate(block) {
   // fetch nav content
   const navMeta = getMetadata('nav');
   block.textContent = '';
+  let baseHeaderUrl = '/fragments/header/master';
+  if (window.location.hostname !== 'www.24petwatch.com') {
+    baseHeaderUrl = 'https://main--24petwatch-crosswalk--hlxsites.hlx.live/fragments/header/master';
+  }
 
-  const navPath = navMeta ? new URL(navMeta).pathname : '/fragments/header/master';
+  const navPath = navMeta ? new URL(navMeta).pathname : baseHeaderUrl;
   const resp = await fetch(`${navPath}.plain.html`);
 
   if (resp.ok) {

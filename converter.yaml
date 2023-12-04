@@ -1,0 +1,6 @@
+# the origin to fetch content from
+origin: https://author-p33903-e129467.adobeaemcloud.com/
+suffix: ".html?wcmmode=disabled"
+
+liveUrls:
+  - https://www.24petwatch.com/
