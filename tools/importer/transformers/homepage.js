@@ -4,20 +4,27 @@ import createCarousel from './carousel.js';
 import createColumns from './columns.js';
 import createTeaser from './teaser.js';
 import createImageList from './imageList.js';
+import createOverflowHero from './overflowHero.js';
+import createColumnsFlex from './columnsFlex.js';
 
 function createSection(currentBlock, main, document) {
   if (currentBlock.textContent.trim() === '') {
     return;
   }
 
-  const headers = currentBlock.querySelector('div.headers.aem-GridColumn--default--12');
-  if (headers) {
-    main.append(headers);
-  }
-
   const teaser = currentBlock.querySelector('div.teaser');
   if (teaser) {
     createTeaser(main, document);
+  }
+
+  const gridFlex = currentBlock.querySelector('div.cmp-container--layoutflex div.aem-Grid div.aem-GridColumn');
+  if (!teaser && gridFlex) {
+    createColumnsFlex(currentBlock, main, document);
+  }
+
+  const headers = currentBlock.querySelector('div.headers.aem-GridColumn--default--12');
+  if (headers) {
+    main.append(headers);
   }
 
   const carousel = currentBlock.querySelector('div.carousel');
@@ -28,6 +35,11 @@ function createSection(currentBlock, main, document) {
   const grid = currentBlock.querySelector('div.aem-Grid div.aem-GridColumn');
   if (!teaser && grid) {
     createColumns(currentBlock, main, document);
+  }
+
+  const overflowHero = currentBlock.querySelector('div.overflowhero');
+  if (overflowHero) {
+    createOverflowHero(currentBlock, main, document);
   }
 
   const imageList = currentBlock.querySelector('div.aem-Grid.aem-Grid--12.aem-Grid--default--12 ul.cmp-image-list__list');
@@ -50,8 +62,6 @@ function createSection(currentBlock, main, document) {
       break;
     }
   }
-
-  main.append(document.createElement('hr'));
 }
 
 // Generalize creating columns from grids
@@ -64,6 +74,10 @@ const createHomepage = (main, document) => {
   if (sectionRaw) {
     for (let i = 0; i < sectionRaw.length; i += 1) {
       createSection(sectionRaw[i], main, document);
+
+      if (i < sectionRaw.length - 1) {
+        main.append(document.createElement('hr'));
+      }
     }
   }
 };
