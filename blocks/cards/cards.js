@@ -1,5 +1,6 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
 
+// domain to be used when not being the CDN stitching
 const edsDomain = 'main--24petwatch--hlxsites.hlx.live';
 const isCanada = window.location.pathname.startsWith('/ca/');
 
