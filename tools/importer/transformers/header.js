@@ -27,10 +27,12 @@ const createHeader = async (main, document) => {
     main.append(document.createElement('hr'));
 
     const ul = document.createElement('ul');
+    const ids = [];
     document.querySelectorAll('div.page-header__notificationBar > div > div').forEach((element) => {
-      if (!element.classList.contains('languagenavigation')) {
+      const link = element.querySelector(':scope > a');
+      if (!element.classList.contains('languagenavigation') && !ids.includes(link.id)) {
         const li = document.createElement('li');
-        const link = element.querySelector('a');
+        ids.push(link.id);
         li.append(link);
         ul.append(li);
       }
