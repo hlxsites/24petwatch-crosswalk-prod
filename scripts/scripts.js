@@ -80,18 +80,18 @@ function buildAutoBlocks(main) {
     }
 
     const baseDomain = !window.location.port
-     ? `${window.location.protocol}//${window.location.hostname}`
-     : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+      ? `${window.location.protocol}//${window.location.hostname}`
+      : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
     if (document.body.classList.contains('blog-post') || document.body.classList.contains('blog-index')) {
       main.querySelectorAll('source').forEach((source) => {
         let src;
         try {
           src = new URL(source.srcset);
         } catch (e) {
-          src = new URL(source.srcset, baseDomain)
+          src = new URL(source.srcset, baseDomain);
         }
-        src.pathname = '/blog' + src.pathname;
-        source.srcset = '.' + src.pathname + src.search;
+        src.pathname = `/blog${src.pathname}`;
+        source.srcset = `.${src.pathname}${src.search}`;
       });
 
       main.querySelectorAll('img').forEach((img) => {
@@ -99,10 +99,10 @@ function buildAutoBlocks(main) {
         try {
           src = new URL(img.src);
         } catch (e) {
-          src = new URL(img.src, baseDomain)
+          src = new URL(img.src, baseDomain);
         }
-        src.pathname = '/blog' + src.pathname;
-        img.src = '.' + src.pathname + src.search;
+        src.pathname = `/blog${src.pathname}`;
+        img.src = `.${src.pathname}${src.search}`;
       });
     }
 
