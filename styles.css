@@ -1,0 +1,463 @@
+/*
+ * Copyright 2020 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+@font-face {
+  font-family: GothamRounded;
+  src: url('/fonts/GothamRnd-Medium_Web.woff');
+  font-weight: 400;
+  font-display: swap
+}
+
+@font-face {
+  font-family: FSMePro;
+  src: url('/fonts/FSMePro.woff');
+  font-display: swap
+}
+
+@font-face {
+  font-family: 'fsmepro-normal-400-fallback';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial');
+  ascent-override: 89.90%;
+  descent-override: 26.76%;
+  line-gap-override: 0.00%;
+  size-adjust: 102.01%;
+}
+
+@font-face {
+  font-family: 'gothamrounded-normal-400-fallback';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial');
+  ascent-override: 83.51%;
+  descent-override: 20.88%;
+  line-gap-override: 0.00%;
+  size-adjust: 112.991%;
+}
+
+:root {
+  /* colors */
+  --link-color: #007680;
+  --link-hover-color: #23527c;
+  --background-color: #fff;
+  --background-color-secondary: #e7e9ea;
+  --overlay-background-color: #eee;
+  --highlight-background-color: #ccc;
+  --text-color: #333f48;
+  --text-secondary-color: #bf0d3e;
+  --heading-text-color: #333f48;
+  --button-primary-color: #bf0d3e;
+  --button-secondary-color: #007680;
+  --button-primary-hover-color: #e8104d;
+  --button-secondary-hover-color: #33bfcc;
+  --footer-background-color: #333f48;
+  --footer-list-background-color: #e7e9ea;
+  --footer-font-color: #fff;
+  --nav-secondary-color: e5e5e5;
+
+  /* fonts */
+  --body-font-family: 'FSMePro', fsmepro-normal-400-fallback, arial, helvetica, sans-serif;
+  --heading-font-family: 'GothamRounded', gothamrounded-normal-400-fallback, arial, helvetica, sans-serif;
+  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+
+  /* body sizes */
+  --body-font-size-m: 1rem;
+  --body-font-size-s: 18px;
+  --body-font-size-xs: 16px;
+
+  /* heading sizes */
+  --heading-font-size-xxl: 2.1875rem;
+  --heading-font-size-xl: 1.625rem;
+  --heading-font-size-l: 1.3125rem;
+  --heading-font-size-m: 1.3125rem;
+  --heading-font-size-s: 1.3125rem;
+  --heading-font-size-xs: 1rem;
+
+  /* heading line heights */
+  --heading-line-height-xxl: 2.813rem;
+  --heading-line-height-xl: 2.25rem;
+  --heading-line-height-l: 1.938rem;
+  --heading-line-height-m: 1.938rem;
+  --heading-line-height-s: 1.938rem;
+  --heading-line-height-xs: 1.625rem;
+
+  /* heading font weight */
+  --heading-font-weight: 400;
+
+  /* nav height */
+  --nav-height: 95px;
+  --header-height: var(--nav-height);
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* heading sizes */
+    --heading-font-size-xxl: 3rem;
+    --heading-font-size-xl: 2.5rem;
+    --heading-font-size-l: 2.1875rem;
+    --heading-font-size-m: 1.625rem;
+
+    /* heading line heights */
+    --heading-line-height-xxl: 3.625rem;
+    --heading-line-height-xl: 3.125rem;
+    --heading-line-height-l: 2.813rem;
+    --heading-line-height-m: 2.25rem;
+
+    /* nav height */
+    --nav-height: 95px;
+    --header-height: calc(44px + var(--nav-height));
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-height: 119px;
+  }
+}
+
+@media (min-width: 1300px) {
+  :root {
+    --nav-height: 95px;
+  }
+}
+
+body {
+  font-size: var(--body-font-size-m);
+  margin: 0;
+  font-family: var(--body-font-family);
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  display: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.appear {
+  display: unset;
+}
+
+header {
+  height: var(--header-height);
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  line-height: 1.25;
+  margin-top: 1em;
+  margin-bottom: .5em;
+  scroll-margin: calc(var(--nav-height) + 1em);
+  color: var(--heading-text-color);
+  text-align: center;
+}
+
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  line-height: var(--heading-line-height-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+  line-height: var(--heading-line-height-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+  line-height: var(--heading-line-height-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+  line-height: var(--heading-line-height-xs);
+}
+
+p, dl, ol, ul, pre, blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+hr {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border: 0;
+  border-bottom: 1px solid var(--overlay-background-color);
+}
+
+code, pre, samp {
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-s);
+}
+
+code, samp {
+  padding: .125em;
+}
+
+pre {
+  overflow: scroll;
+}
+
+main pre {
+  background-color: var(--overlay-background-color);
+  padding: 1em;
+  border-radius: .25em;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+a:any-link {
+  color: var(--link-color);
+  font-family: var(--heading-font-family);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--link-hover-color);
+}
+
+a[href*="//"]
+  :not([href^="https://www.24petwatch.com"])
+  :not([href^="https://24petwatch.com"])
+  :not([href*="tel:"])
+  :not([href^=localhost])
+  :not(.cards a)
+  :after {
+  font-family: 'Font Awesome 6 Pro', sans-serif;
+  content: "";
+  margin:.3rem;
+  font-size: 0.9rem;
+}
+
+/* buttons */
+a.button:any-link, button {
+  font-family: var(--body-font-family);
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  padding: .875rem 1.625rem;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--background-color);
+  background-color: var(--button-primary-color);
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: .625rem;
+}
+
+@media (min-width: 768px) {
+  a.button:any-link, button {
+    display: inline-block;
+  }
+}
+
+a.button:hover, a.button:focus, button:hover, button:focus  {
+  background-color: var(--button-primary-hover-color);
+  cursor: pointer;
+}
+
+button:disabled, button:disabled:hover {
+  background-color: var(--overlay-background-color);
+  cursor: unset;
+}
+
+a.button.secondary, button.secondary {
+  background-color: var(--button-secondary-color);
+}
+
+a.button.secondary:hover, button.secondary:focus {
+  background-color: var(--button-secondary-hover-color);
+}
+
+main input {
+  font-size: 1.25rem;
+  width: 100%;
+  max-width: 50rem;
+  display: block;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.6rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+main input:hover {
+  border: 1px solid var(--text-color);
+}
+
+main blockquote {
+  font-style: italic;
+  margin: 3rem;
+  text-indent: -1rem;
+  hanging-punctuation: first;
+}
+
+main blockquote p::before {
+  content: "“";
+  line-height: 0;
+}
+
+main blockquote p::after {
+  content: "”";
+  line-height: 0;
+}
+
+main img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.icon {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+
+.icon svg {
+  height: 100%;
+  width: 100%;
+}
+
+main .section {
+  padding: 1.875rem;
+}
+
+.section > div {
+  max-width: 73.123rem;
+  margin: auto;
+}
+
+/* section metadata */
+main .section.teal-bg, main .section.teal {
+  background-color: #007680;
+  color: white;
+}
+
+main .section.gray-bg, main .section.lightcool, main .section.lightgray {
+  background-color: #e7e9ea;
+}
+
+main .section.light-gray-bg, main .section.lightergray {
+  background-color: #FBFBFB;
+}
+
+main .section.warm-white-bg, main .section.cream {
+  background-color: #fff1d6;
+}
+
+main .section.highlight {
+  font-family: var(--heading-font-family);
+  text-align: center;
+  padding-top: 3.075rem;
+  padding-bottom: 3.075rem;
+}
+
+main .section.highlight p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.938rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Blog post styles */
+body.blog-post main .section {
+  padding: 0.9375rem;
+}
+
+body.blog-post main picture {
+  display: flex;
+  justify-content: center;
+}
+
+body.blog-post main .section > div {
+  margin: 1.25rem auto;
+  font-size: 1.125rem;
+  padding: 0 0.9375rem;
+}
+
+body.blog-post main h1, body.blog-post main h2, body.blog-post main h3, body.blog-post main h4,
+body.blog-index main h1, body.blog-index main h2, body.blog-index main h3, body.blog-index main h4 {
+  text-align: left;
+}
+
+body.blog-post main h1 {
+  font-size: 2.1875rem;
+  line-height: 2.813rem;
+  font-weight: 300;
+}
+
+body.blog-post main h2 {
+  font-size: 1.625rem;
+  line-height: 2.25rem;
+}
+
+body.blog-post .default-content-wrapper p.author {
+  font-family: var(--heading-font-family);
+  font-size: 1.3125rem;
+  font-weight: 300;
+}
+
+main .section.highlight p em {
+  display: block;
+  font-size: 2.5rem;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+main .section.heading-light h2 {
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 1.938rem;
+}
+
+@media (min-width: 768px) {
+  body.blog-post main .section {
+    padding: 1.875rem;
+  }
+
+  main .section.highlight p {
+    font-size: 1.625rem;
+    line-height: 2.25rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  main .section.highlight p em {
+    display: inline;
+    font-size: 3rem;
+    line-height: 3.625rem;
+  }
+
+  main .section.heading-light h2 {
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 2.25rem;
+  }
+}
