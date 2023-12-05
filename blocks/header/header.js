@@ -197,6 +197,24 @@ function instrumentTrackingEvents(header) {
 }
 
 /**
+ * instruments the tracking in the header
+ * @param {Element} header The header block element
+ */
+function updateCountryLink(nav) {
+  const isCanada = window.location.pathname.startsWith('/ca/') || window.location.pathname === '/ca';
+  const baseDomain = !window.location.port
+    ? `${window.location.protocol}//${window.location.hostname}`
+    : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+  nav.querySelectorAll('a').forEach((anchor) => {
+    if (isCanada && (anchor.href.startsWith(baseDomain) || anchor.href.startsWith('/'))) {
+      const url = new URL(anchor.href);
+      url.pathname = `/ca${url.pathname}`;
+      anchor.href = url.toString();
+    }
+  });
+}
+
+/**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -280,6 +298,8 @@ export default async function decorate(block) {
     decorateButtons(nav);
     decorateLinks(nav);
     instrumentTrackingEvents(nav);
+    updateCountryLink(nav);
+
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);

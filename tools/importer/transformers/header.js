@@ -15,7 +15,14 @@ const createHeader = async (main, document) => {
 
     main.append(document.createElement('hr'));
 
-    main.append(document.querySelector('ul.cmp-navigation__group'));
+    const blog = document.createElement('li');
+
+    // Force append blog to the end of the navigation group
+    blog.innerHTML = '<a href="/blog" class="cmp-navigation__item-link">Blog</a>';
+    const navigationGroup = document.querySelector('ul.cmp-navigation__group');
+    navigationGroup.children[navigationGroup.children.length - 1].before(blog);
+
+    main.append(navigationGroup);
 
     main.append(document.createElement('hr'));
 
@@ -23,7 +30,8 @@ const createHeader = async (main, document) => {
     document.querySelectorAll('div.page-header__notificationBar > div > div').forEach((element) => {
       if (!element.classList.contains('languagenavigation')) {
         const li = document.createElement('li');
-        li.append(element);
+        const link = element.querySelector('a');
+        li.append(link);
         ul.append(li);
       }
     });
