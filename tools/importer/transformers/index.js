@@ -9,7 +9,6 @@ import createMetadata from './metadata.js';
 import cleanUpHTML from './cleanUpHTML.js';
 
 export const transformers = [
-  cleanUpHTML,
   createFullLayoutSection,
   createHero,
   createHomepage,
@@ -31,4 +30,5 @@ export const preTransformers = [
 
 export const postTransformers = [
   createMetadata,
+  cleanUpHTML,
 ];

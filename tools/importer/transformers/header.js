@@ -15,15 +15,25 @@ const createHeader = async (main, document) => {
 
     main.append(document.createElement('hr'));
 
-    main.append(document.querySelector('ul.cmp-navigation__group'));
+    const blog = document.createElement('li');
+
+    // Force append blog to the end of the navigation group
+    blog.innerHTML = '<a href="/blog" class="cmp-navigation__item-link">Blog</a>';
+    const navigationGroup = document.querySelector('ul.cmp-navigation__group');
+    navigationGroup.children[navigationGroup.children.length - 1].before(blog);
+
+    main.append(navigationGroup);
 
     main.append(document.createElement('hr'));
 
     const ul = document.createElement('ul');
+    const ids = [];
     document.querySelectorAll('div.page-header__notificationBar > div > div').forEach((element) => {
-      if (!element.classList.contains('languagenavigation')) {
+      const link = element.querySelector(':scope > a');
+      if (!element.classList.contains('languagenavigation') && !ids.includes(link.id)) {
         const li = document.createElement('li');
-        li.append(element);
+        ids.push(link.id);
+        li.append(link);
         ul.append(li);
       }
     });
