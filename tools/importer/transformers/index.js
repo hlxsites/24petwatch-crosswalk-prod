@@ -10,6 +10,7 @@ import cleanUpHTML from './cleanUpHTML.js';
 import createBlogArticle from './blogArticle.js';
 import createBlogBanner from './blogBanner.js';
 import cleanBlog from './cleanBlog.js';
+import makeProxySrcs from './makeProxySrcs.js';
 
 export const transformers = [
   createFullLayoutSection,
@@ -30,7 +31,6 @@ export const xfAsyncTransformers = [
 ];
 
 export const preTransformers = [
-
 ];
 
 export const postTransformers = [
