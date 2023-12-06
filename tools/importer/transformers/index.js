@@ -7,6 +7,9 @@ import createHeader from './header.js';
 import createHero from './hero.js';
 import createMetadata from './metadata.js';
 import cleanUpHTML from './cleanUpHTML.js';
+import createBlogArticle from './blogArticle.js';
+import createBlogBanner from './blogBanner.js';
+import cleanBlog from './cleanBlog.js';
 
 export const transformers = [
   createFullLayoutSection,
@@ -14,6 +17,8 @@ export const transformers = [
   createHomepage,
   createCards,
   createFeatureImage,
+  createBlogArticle,
+  createBlogBanner,
 ];
 
 export const xfTransformers = [
@@ -31,4 +36,5 @@ export const preTransformers = [
 export const postTransformers = [
   createMetadata,
   cleanUpHTML,
+  cleanBlog,
 ];

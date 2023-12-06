@@ -2,7 +2,8 @@
 
 const createHero = (main, document) => {
   const hero = main.querySelector('div#mainContent > div > div:first-child');
-  if (hero) {
+  const title = hero.querySelector('h1');
+  if (hero && title) {
     const titleNodes = hero.querySelector('h1').childNodes;
 
     const h1 = document.createElement('h1');
