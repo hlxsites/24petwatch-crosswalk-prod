@@ -30,8 +30,18 @@ const createHeader = async (main, document) => {
     const ids = [];
     document.querySelectorAll('div.page-header__notificationBar > div > div').forEach((element) => {
       const link = element.querySelector(':scope > a');
+
       if (!element.classList.contains('languagenavigation') && !ids.includes(link.id)) {
+
         const li = document.createElement('li');
+
+        if (link.href == 'https://www.mypethealth.com/') {
+          link.textContent = 'Pet Parent Login';
+          const additionalLink = document.createElement('li');
+          additionalLink.innerHTML = '<a href="https://petpro.my24pet.com/search/home">Pet Professionals Login</a>';
+          ul.append(additionalLink);
+        }
+
         ids.push(link.id);
         li.append(link);
         ul.append(li);
