@@ -30,6 +30,9 @@ indices:
         select: head > meta[property="article:tag"]
         values: |
           match(attribute(el, 'content'), '([^,]+)')
+      tags-raw:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, 'content')
   blog_ca:
     include:
       - /ca/blog/**
@@ -59,3 +62,7 @@ indices:
         select: head > meta[property="article:tag"]
         values: |
           match(attribute(el, 'content'), '([^,]+)')
+      tags-raw:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, 'content')
+
