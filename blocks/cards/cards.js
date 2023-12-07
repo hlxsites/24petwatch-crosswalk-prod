@@ -1,13 +1,16 @@
-import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
-
-// domain to be used when not being the CDN stitching
-const edsDomain = 'main--24petwatch--hlxsites.hlx.live';
-const isCanada = window.location.pathname.startsWith('/ca/') || window.location.pathname === '/ca';
+import {
+  createOptimizedPicture,
+  getMetadata,
+  edsBlogDomain,
+  isCanada,
+  isBlogLocal,
+  isLiveSite,
+} from '../../scripts/lib-franklin.js';
 
 async function getTagFilters() {
   let index = new URL(`${isCanada ? '/ca' : ''}/blog/tag-filters.json`, window.location.origin);
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    index = new URL(`https://${edsDomain}${isCanada ? '/ca' : ''}/blog/tag-filters.json`);
+  if (!isLiveSite) {
+    index = new URL(`https://${edsBlogDomain}${isCanada ? '/ca' : ''}/blog/tag-filters.json`);
   }
   const response = await fetch(index);
   const json = await response.json();
@@ -16,8 +19,8 @@ async function getTagFilters() {
 
 async function loadBlogPosts() {
   let index = new URL(`${isCanada ? '/ca' : ''}/blog/query-index.json`, window.location.origin);
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    index = new URL(`https://${edsDomain}${isCanada ? '/ca' : ''}/blog/query-index.json`);
+  if (!isLiveSite) {
+    index = new URL(`https://${edsBlogDomain}${isCanada ? '/ca' : ''}/blog/query-index.json`);
   }
   const chunkSize = 100;
   const loadChunk = async (offset) => {
@@ -96,11 +99,11 @@ function createBlogCard(item = {}) {
   let { title, image, path } = item;
   const { description } = item;
 
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    path = new URL(path, `https://${edsDomain}`).toString();
+  if (!isLiveSite && !isBlogLocal) {
+    path = new URL(path, `https://${edsBlogDomain}`).toString();
     try {
-      image = new URL(image, `https://${edsDomain}`);
-      image.hostname = edsDomain;
+      image = new URL(image, `https://${edsBlogDomain}`);
+      image.hostname = edsBlogDomain;
     } catch (e) { /* ignore */ }
   } else {
     try {

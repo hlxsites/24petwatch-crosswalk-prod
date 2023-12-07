@@ -6,6 +6,11 @@ import {
   isMobile,
   isTablet,
   isDesktop,
+  baseDomain,
+  isCanada,
+  isLiveSite,
+  isCrosswalkDomain,
+  getXWalkDomain,
 } from '../../scripts/lib-franklin.js';
 import { trackGTMEvent } from '../../scripts/lib-analytics.js';
 
@@ -201,10 +206,6 @@ function instrumentTrackingEvents(header) {
  * @param {Element} header The header block element
  */
 function updateCountryLink(nav) {
-  const isCanada = window.location.pathname.startsWith('/ca/') || window.location.pathname === '/ca';
-  const baseDomain = !window.location.port
-    ? `${window.location.protocol}//${window.location.hostname}`
-    : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
   nav.querySelectorAll('a').forEach((anchor) => {
     if (isCanada && (anchor.href.startsWith(baseDomain) || anchor.href.startsWith('/'))) {
       const url = new URL(anchor.href);
@@ -223,8 +224,8 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   block.textContent = '';
   let baseHeaderUrl = '/fragments/header/master';
-  if (window.location.hostname !== 'www.24petwatch.com') {
-    baseHeaderUrl = 'https://main--24petwatch-crosswalk--hlxsites.hlx.live/fragments/header/master';
+  if (!isLiveSite && !isCrosswalkDomain) {
+    baseHeaderUrl = `https://${getXWalkDomain()}/fragments/header/master`;
   }
 
   const navPath = navMeta ? new URL(navMeta).pathname : baseHeaderUrl;
