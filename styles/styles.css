@@ -364,11 +364,6 @@ main .section.teal-bg, main .section.teal {
   color: white;
 }
 
-main .section.teal-bg, main .section.teal h4 {
-  color: white;
-}
-
-
 main .section.gray-bg, main .section.lightcool, main .section.lightgray {
   background-color: #e7e9ea;
 }
@@ -414,6 +409,10 @@ body.blog-post main .section > div {
 body.blog-post main h1, body.blog-post main h2, body.blog-post main h3, body.blog-post main h4,
 body.blog-index main h1, body.blog-index main h2, body.blog-index main h3, body.blog-index main h4 {
   text-align: left;
+}
+
+main .section.teal-bg, main .section.teal h4 {
+  color: white;
 }
 
 body.blog-post main h1 {
