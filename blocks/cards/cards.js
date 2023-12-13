@@ -1,13 +1,16 @@
-import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
-
-// domain to be used when not being the CDN stitching
-const edsDomain = 'main--24petwatch--hlxsites.hlx.live';
-const isCanada = window.location.pathname.startsWith('/ca/') || window.location.pathname === '/ca';
+import {
+  createOptimizedPicture,
+  getMetadata,
+  edsBlogDomain,
+  isCanada,
+  isBlogLocal,
+  isLiveSite,
+} from '../../scripts/lib-franklin.js';
 
 async function getTagFilters() {
   let index = new URL(`${isCanada ? '/ca' : ''}/blog/tag-filters.json`, window.location.origin);
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    index = new URL(`https://${edsDomain}${isCanada ? '/ca' : ''}/blog/tag-filters.json`);
+  if (!isLiveSite) {
+    index = new URL(`https://${edsBlogDomain}${isCanada ? '/ca' : ''}/blog/tag-filters.json`);
   }
   const response = await fetch(index);
   const json = await response.json();
@@ -16,8 +19,8 @@ async function getTagFilters() {
 
 async function loadBlogPosts() {
   let index = new URL(`${isCanada ? '/ca' : ''}/blog/query-index.json`, window.location.origin);
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    index = new URL(`https://${edsDomain}${isCanada ? '/ca' : ''}/blog/query-index.json`);
+  if (!isLiveSite) {
+    index = new URL(`https://${edsBlogDomain}${isCanada ? '/ca' : ''}/blog/query-index.json`);
   }
   const chunkSize = 100;
   const loadChunk = async (offset) => {
@@ -96,11 +99,11 @@ function createBlogCard(item = {}) {
   let { title, image, path } = item;
   const { description } = item;
 
-  if (!window.location.hostname.includes('24petwatch.com')) {
-    path = new URL(path, `https://${edsDomain}`).toString();
+  if (!isLiveSite && !isBlogLocal) {
+    path = new URL(path, `https://${edsBlogDomain}`).toString();
     try {
-      image = new URL(image, `https://${edsDomain}`);
-      image.hostname = edsDomain;
+      image = new URL(image, `https://${edsBlogDomain}`);
+      image.hostname = edsBlogDomain;
     } catch (e) { /* ignore */ }
   } else {
     try {
@@ -225,8 +228,18 @@ async function createFilterSelect(block, total, currentTag) {
 
 async function populateBlogTeaser(block) {
   const tags = getMetadata('article:tag').split(', ');
-  const response = await fetchBlogPosts(1, tags, '', 3);
-  response.items.forEach((item) => {
+  const related = getMetadata('related').split(', ').map((url) => new URL(url, window.location.origin).pathname);
+  let cards = [];
+  if (related.length === 0) {
+    const response = await fetchBlogPosts(1, tags, '', 3);
+    cards = cards.concat(response.items);
+  } else {
+    const response = await fetchBlogPosts(1, [], '', 200);
+    const relatedCards = response.items.filter(({ path }) => related.includes(path));
+    cards = cards.concat(relatedCards);
+    cards = cards.concat(response.items.slice(0, 3 - relatedCards.length));
+  }
+  cards.forEach((item) => {
     const card = document.createElement('div');
     card.appendChild(createBlogCard(item));
     block.appendChild(card);
