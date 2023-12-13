@@ -64,7 +64,7 @@ function buildBlockPostPage(main) {
   if (lastContentSection) {
     lastContentSection.appendChild(socialMediaButtons.cloneNode(true));
 
-    const fragment = document.createRange().createContextualFragment('<div><div class="fragment">/fragments/blog-footer</div></div>');
+    const fragment = document.createRange().createContextualFragment('<div><div class="fragment">/blog/fragments/blog-footer</div></div>');
     lastContentSection.parentElement.appendChild(fragment);
   }
 }

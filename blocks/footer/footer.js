@@ -4,6 +4,9 @@ import {
   decorateIcons,
   decorateLinks,
   isMobile,
+  isLiveSite,
+  isCrosswalkDomain,
+  getXWalkDomain,
 } from '../../scripts/lib-franklin.js';
 
 const socialNetworks = ['Instagram', 'Twitter', 'Facebook'];
@@ -59,8 +62,8 @@ export default async function decorate(block) {
   block.textContent = '';
 
   let baseFooterUrl = '/fragments/footer/master';
-  if (window.location.hostname !== 'www.24petwatch.com') {
-    baseFooterUrl = 'https://main--24petwatch-crosswalk--hlxsites.hlx.live/fragments/footer/master';
+  if (!isLiveSite && !isCrosswalkDomain) {
+    baseFooterUrl = `https://${getXWalkDomain()}/fragments/footer/master`;
   }
 
   // fetch footer content

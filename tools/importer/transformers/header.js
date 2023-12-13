@@ -32,10 +32,9 @@ const createHeader = async (main, document) => {
       const link = element.querySelector(':scope > a');
 
       if (!element.classList.contains('languagenavigation') && !ids.includes(link.id)) {
-
         const li = document.createElement('li');
 
-        if (link.href == 'https://www.mypethealth.com/') {
+        if (link.href === 'https://www.mypethealth.com/') {
           link.textContent = 'Pet Parent Login';
           const additionalLink = document.createElement('li');
           additionalLink.innerHTML = '<a href="https://petpro.my24pet.com/search/home">Pet Professionals Login</a>';
