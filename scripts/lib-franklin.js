@@ -674,7 +674,7 @@ export const isTablet = window.matchMedia('(min-width: 768px)');
 export const isDesktop = window.matchMedia('(min-width: 900px)');
 export const edsBlogDomain = 'main--24petwatch--hlxsites.hlx.live';
 export const edsXWalkDomain = 'main--24petwatch-crosswalk--hlxsites.hlx.live';
-export const edsXWalkDomainProd = 'main--24petwatch-crosswalk-prod--hlxsites.hlx.page';
+export const edsXWalkDomainProd = 'main--24petwatch-crosswalk-prod--hlxsites.hlx.live';
 export const isCrosswalkDomain = window.location.hostname === edsXWalkDomain
   || window.location.hostname === edsXWalkDomainProd;
 export const isCanada = window.location.pathname.startsWith('/ca/') || window.location.pathname === '/ca';
