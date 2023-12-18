@@ -411,6 +411,10 @@ body.blog-index main h1, body.blog-index main h2, body.blog-index main h3, body.
   text-align: left;
 }
 
+main .section.teal-bg, main .section.teal h4 {
+  color: white;
+}
+
 body.blog-post main h1 {
   font-size: 2.1875rem;
   line-height: 2.813rem;

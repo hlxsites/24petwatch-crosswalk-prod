@@ -61,6 +61,7 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
 /* hamburger */
@@ -221,6 +222,9 @@ header nav .nav-sections > ul > li {
   font-size: 1.3125rem;
   line-height: 1.938rem;
   border-bottom: 1px solid var(--nav-secondary-color);
+  align-items: center;
+  white-space: nowrap;
+  margin: auto 0;
 }
 
 header nav .nav-sections ul > li[aria-expanded="true"] {
@@ -247,6 +251,10 @@ header nav .nav-sections ul > li[aria-expanded="true"] > ul {
 header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
   font-size: 1rem;
+}
+
+header nav .nav-sections > ul > li:last-child {
+  white-space: normal;
 }
 
 header nav .nav-sections ul > li > ul > li > a {
