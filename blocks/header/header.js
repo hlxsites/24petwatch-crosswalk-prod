@@ -18,13 +18,13 @@ const SCROLL_STEP = 25;
 
 const urls = {
   usa: {
-    url: './',
+    url: '/',
     name: 'US',
     icon: 'icon-flagusa',
     lang: 'en-US',
   },
   canada: {
-    url: './ca',
+    url: '/ca',
     name: 'Canada',
     icon: 'icon-flagcanada',
     lang: 'en-CA',
@@ -226,6 +226,18 @@ function removeTargetBlank(header) {
 }
 
 /**
+ * Adds a link to the logo
+ * @param {Element} header The header block element
+ */
+function addLinkToLogo(header) {
+  const logo = header.querySelector('.icon-logo');
+  if (logo) {
+    let homeURL = isCanada ? urls.canada.url : urls.usa.url;
+    logo.innerHTML = `<a href="${homeURL}" title="24PetWatch">${logo.innerHTML}</a>`;
+  }
+}
+
+/**
  * Rewrite links to add Canada to the path
  * @param {Element} header The header block element
  */
@@ -327,6 +339,7 @@ export default async function decorate(block) {
     instrumentTrackingEvents(nav);
     removeTargetBlank(nav);
     addCanadaToLinks(nav);
+    addLinkToLogo(nav);
 
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
