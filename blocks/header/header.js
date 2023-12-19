@@ -254,6 +254,19 @@ function addCanadaToLinks(header) {
 }
 
 /**
+ * Adds external link icons to links
+ * @param {Element} header 
+ */
+function addExternalLinkIcons(header) {
+  header.querySelectorAll('a').forEach((anchor) => {
+    const url = new URL(anchor.href);
+    if (url.hostname !== window.location.hostname) {
+      anchor.classList.add('icon-external');
+    }
+  });
+}
+
+/**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -340,6 +353,7 @@ export default async function decorate(block) {
     removeTargetBlank(nav);
     addCanadaToLinks(nav);
     addLinkToLogo(nav);
+    addExternalLinkIcons(nav);
 
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
