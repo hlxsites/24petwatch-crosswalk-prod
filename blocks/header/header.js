@@ -18,13 +18,13 @@ const SCROLL_STEP = 25;
 
 const urls = {
   usa: {
-    url: './',
+    url: '/',
     name: 'US',
     icon: 'icon-flagusa',
     lang: 'en-US',
   },
   canada: {
-    url: './ca',
+    url: '/ca',
     name: 'Canada',
     icon: 'icon-flagcanada',
     lang: 'en-CA',
@@ -126,17 +126,24 @@ function toggleMenu(nav, navSections, closeAll = null) {
 function decorateLanguageSelector(block) {
   let currentCountry = urls.usa;
   let alternateCountry = urls.canada;
+  let newCountryUrl;
   if (isCanada) {
     currentCountry = urls.canada;
     alternateCountry = urls.usa;
   }
 
+  if (isCanada) {
+    newCountryUrl = new URL(window.location.pathname.replace('/ca', ''), window.location.origin);
+  } else {
+    newCountryUrl = new URL(`/ca${window.location.pathname}`, window.location.origin);
+  }
+
   const languageSelector = document.createElement('li');
   languageSelector.classList.add('language-selector');
-  const alternateCountryUrl = new URL(alternateCountry.url, window.location.origin);
+  //const alternateCountryUrl = new URL(alternateCountry.url, window.location.origin);
   languageSelector.innerHTML = `<span class="icon ${currentCountry.icon}"></span>
       <ul>
-        <li><a href="${alternateCountryUrl.toString()}" hreflang="${alternateCountry.lang}" rel="alternate" title="${alternateCountry.name}"><span class="icon ${alternateCountry.icon}"></span>${alternateCountry.name}</a></li>
+        <li><a href="${newCountryUrl.toString()}" hreflang="${alternateCountry.lang}" rel="alternate" title="${alternateCountry.name}"><span class="icon ${alternateCountry.icon}"></span>${alternateCountry.name}</a></li>
       </ul>`;
 
   const secondaryMenu = block.querySelector(':scope > ul');
@@ -219,25 +226,44 @@ function removeTargetBlank(header) {
 }
 
 /**
+ * Adds a link to the logo
+ * @param {Element} header The header block element
+ */
+function addLinkToLogo(header) {
+  const logo = header.querySelector('.icon-logo');
+  if (logo) {
+    let homeURL = isCanada ? urls.canada.url : urls.usa.url;
+    logo.innerHTML = `<a href="${homeURL}" title="24PetWatch">${logo.innerHTML}</a>`;
+  }
+}
+
+/**
  * Rewrite links to add Canada to the path
  * @param {Element} header The header block element
  */
 function addCanadaToLinks(header) {
-  const linksToUpdate = [
-    '/blog',
-    '/lost-pet-protection/lps-quote',
-  ];
-
   if (isCanada) {
     header.querySelectorAll('a').forEach((anchor) => {
+      if (anchor.getAttribute('rel') === 'alternate') return;
       const url = new URL(anchor.href);
-      if (linksToUpdate.includes(url.pathname)) {
-        const newUrl = new URL(anchor.href, window.location.origin);
-        newUrl.pathname = `/ca${url.pathname}`;
-        anchor.href = newUrl.toString();
-      }
+      const newUrl = new URL(anchor.href, window.location.origin);
+      newUrl.pathname = `/ca${url.pathname}`;
+      anchor.href = newUrl.toString();
     });
   }
+}
+
+/**
+ * Adds external link icons to links
+ * @param {Element} header 
+ */
+function addExternalLinkIcons(header) {
+  header.querySelectorAll('a').forEach((anchor) => {
+    const url = new URL(anchor.href);
+    if (url.hostname !== window.location.hostname) {
+      anchor.classList.add('icon-external');
+    }
+  });
 }
 
 /**
@@ -326,6 +352,8 @@ export default async function decorate(block) {
     instrumentTrackingEvents(nav);
     removeTargetBlank(nav);
     addCanadaToLinks(nav);
+    addLinkToLogo(nav);
+    addExternalLinkIcons(nav);
 
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';

@@ -399,7 +399,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
 
   header nav .nav-sections > ul > li {
     font-weight: 500;
-    font-size: 1.3125rem;
+    font-size: 1.208rem;
     line-height: 1.938rem;
     padding: 0;
     padding-right: 2rem;
@@ -637,4 +637,12 @@ header nav > .nav-secondary .language-selector > ul > li > a {
 .nav-wrapper.slide-down {
   animation-name: slide-down;
   transform: translateY(0);
+}
+
+.icon-external:after {
+  display: inline-block;
+  content: url('/blog/fragments/external-link-icon.svg');
+  width: 10px;
+  height: 10px;
+  padding-left: 10px;
 }
