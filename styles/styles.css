@@ -235,7 +235,7 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-body.blog-post a:any-link {
+body.blog-post main .sharing-container a:any-link {
   font-family: var(--body-font-family);
 }
 
@@ -409,6 +409,10 @@ body.blog-post main .section > div {
 body.blog-post main h1, body.blog-post main h2, body.blog-post main h3, body.blog-post main h4,
 body.blog-index main h1, body.blog-index main h2, body.blog-index main h3, body.blog-index main h4 {
   text-align: left;
+}
+
+main .section.teal-bg, main .section.teal h4 {
+  color: white;
 }
 
 body.blog-post main h1 {

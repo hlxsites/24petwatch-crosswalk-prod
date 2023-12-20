@@ -6,7 +6,6 @@ import {
   isMobile,
   isTablet,
   isDesktop,
-  baseDomain,
   isCanada,
   isLiveSite,
   isCrosswalkDomain,
@@ -127,16 +126,23 @@ function toggleMenu(nav, navSections, closeAll = null) {
 function decorateLanguageSelector(block) {
   let currentCountry = urls.usa;
   let alternateCountry = urls.canada;
-  if (window.location.pathname.startsWith('/ca')) {
+  let newCountryUrl;
+  if (isCanada) {
     currentCountry = urls.canada;
     alternateCountry = urls.usa;
+  }
+
+  if (isCanada) {
+    newCountryUrl = new URL(window.location.pathname.replace('/ca', ''), window.location.origin);
+  } else {
+    newCountryUrl = new URL(`/ca${window.location.pathname}`, window.location.origin);
   }
 
   const languageSelector = document.createElement('li');
   languageSelector.classList.add('language-selector');
   languageSelector.innerHTML = `<span class="icon ${currentCountry.icon}"></span>
       <ul>
-        <li><a href="${alternateCountry.url}" hreflang="${alternateCountry.lang}" rel="alternate" title="${alternateCountry.name}"><span class="icon ${alternateCountry.icon}"></span>${alternateCountry.name}</a></li>
+        <li><a href="${newCountryUrl.toString()}" hreflang="${alternateCountry.lang}" rel="alternate" title="${alternateCountry.name}"><span class="icon ${alternateCountry.icon}"></span>${alternateCountry.name}</a></li>
       </ul>`;
 
   const secondaryMenu = block.querySelector(':scope > ul');
@@ -202,15 +208,59 @@ function instrumentTrackingEvents(header) {
 }
 
 /**
- * instruments the tracking in the header
+ * Removes target blank from local links
  * @param {Element} header The header block element
  */
-function updateCountryLink(nav) {
-  nav.querySelectorAll('a').forEach((anchor) => {
-    if (isCanada && (anchor.href.startsWith(baseDomain) || anchor.href.startsWith('/'))) {
+function removeTargetBlank(header) {
+  header.querySelectorAll('a[target="_blank"]').forEach((anchor) => {
+    try {
       const url = new URL(anchor.href);
-      url.pathname = `/ca${url.pathname}`;
-      anchor.href = url.toString();
+      if (url.hostname === window.location.hostname) {
+        anchor.removeAttribute('target');
+      }
+    } catch (e) {
+      // do nothing
+    }
+  });
+}
+
+/**
+ * Adds a link to the logo
+ * @param {Element} header The header block element
+ */
+function addLinkToLogo(header) {
+  const logo = header.querySelector('.icon-logo');
+  if (logo) {
+    const homeURL = isCanada ? urls.canada.url : urls.usa.url;
+    logo.innerHTML = `<a href="${homeURL}" title="24PetWatch">${logo.innerHTML}</a>`;
+  }
+}
+
+/**
+ * Rewrite links to add Canada to the path
+ * @param {Element} header The header block element
+ */
+function addCanadaToLinks(header) {
+  if (isCanada) {
+    header.querySelectorAll('a').forEach((anchor) => {
+      if (anchor.getAttribute('rel') === 'alternate') return;
+      const url = new URL(anchor.href);
+      const newUrl = new URL(anchor.href, window.location.origin);
+      newUrl.pathname = `/ca${url.pathname}`;
+      anchor.href = newUrl.toString();
+    });
+  }
+}
+
+/**
+ * Adds external link icons to links
+ * @param {Element} header
+ */
+function addExternalLinkIcons(header) {
+  header.querySelectorAll('a').forEach((anchor) => {
+    const url = new URL(anchor.href);
+    if (url.hostname !== window.location.hostname) {
+      anchor.classList.add('icon-external');
     }
   });
 }
@@ -299,7 +349,10 @@ export default async function decorate(block) {
     decorateButtons(nav);
     decorateLinks(nav);
     instrumentTrackingEvents(nav);
-    updateCountryLink(nav);
+    removeTargetBlank(nav);
+    addCanadaToLinks(nav);
+    addLinkToLogo(nav);
+    addExternalLinkIcons(nav);
 
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';

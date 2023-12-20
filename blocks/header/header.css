@@ -61,6 +61,7 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
 /* hamburger */
@@ -221,6 +222,9 @@ header nav .nav-sections > ul > li {
   font-size: 1.3125rem;
   line-height: 1.938rem;
   border-bottom: 1px solid var(--nav-secondary-color);
+  align-items: center;
+  white-space: nowrap;
+  margin: auto 0;
 }
 
 header nav .nav-sections ul > li[aria-expanded="true"] {
@@ -247,6 +251,10 @@ header nav .nav-sections ul > li[aria-expanded="true"] > ul {
 header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
   font-size: 1rem;
+}
+
+header nav .nav-sections > ul > li:last-child {
+  white-space: normal;
 }
 
 header nav .nav-sections ul > li > ul > li > a {
@@ -391,7 +399,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"] a.icon-arrow {
 
   header nav .nav-sections > ul > li {
     font-weight: 500;
-    font-size: 1.3125rem;
+    font-size: 1.208rem;
     line-height: 1.938rem;
     padding: 0;
     padding-right: 2rem;
@@ -629,4 +637,12 @@ header nav > .nav-secondary .language-selector > ul > li > a {
 .nav-wrapper.slide-down {
   animation-name: slide-down;
   transform: translateY(0);
+}
+
+.icon-external::after {
+  display: inline-block;
+  content: url('/blog/fragments/external-link-icon.svg');
+  width: 10px;
+  height: 10px;
+  padding-left: 10px;
 }
