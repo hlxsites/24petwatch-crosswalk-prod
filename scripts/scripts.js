@@ -15,6 +15,7 @@ import {
   loadCSS,
   getMetadata,
   toClassName,
+  isCanada,
 } from './lib-franklin.js';
 
 import {
@@ -64,7 +65,8 @@ function buildBlockPostPage(main) {
   if (lastContentSection) {
     lastContentSection.appendChild(socialMediaButtons.cloneNode(true));
 
-    const fragment = document.createRange().createContextualFragment('<div><div class="fragment">/blog/fragments/blog-footer</div></div>');
+    const fragmentPath = isCanada ? '/ca/blog/fragments/blog-footer' : '/blog/fragments/blog-footer';
+    const fragment = document.createRange().createContextualFragment(`<div><div class="fragment">${fragmentPath}</div></div>`);
     lastContentSection.parentElement.appendChild(fragment);
   }
 }
@@ -192,6 +194,19 @@ function instrumentTrackingEvents(main) {
     });
 }
 
+function cleanLocalhostLinks(main) {
+  main.querySelectorAll('a')
+    .forEach((anchor) => {
+      if (anchor.href.startsWith('http://localhost:3001')) {
+        const url = new URL(anchor.href);
+        url.hostname = 'www.24petwatch.com';
+        url.scheme = 'https';
+        url.port = '';
+        anchor.href = url.toString();
+      }
+    });
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -217,6 +232,7 @@ async function loadLazy(doc) {
   analyticsSetConsent(true);
   await initializeConversionTracking();
   instrumentTrackingEvents(main);
+  cleanLocalhostLinks(main);
 }
 
 /**
