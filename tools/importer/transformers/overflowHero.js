@@ -10,16 +10,29 @@ function createOverflowHero(currentBlock, main, document) {
 
   if (discount) {
     const discountParagraph = document.createElement('p');
-    const amount = document.createElement('strong');
-    amount.textContent = discount.querySelector('div.cmp-title').textContent;
-    const smallPrints = document.createElement('em');
-    smallPrints.textContent = discount.querySelector('div.cmp-text-specialfineprint').textContent;
+    const originalDiscount = {
+      title: discount.querySelector('div.cmp-title'),
+      text: discount.querySelector('div.cmp-text--size-large'),
+      smallPrints: discount.querySelector('div.cmp-text-specialfineprint'),
+    }
 
-    discountParagraph.append(amount);
-    discountParagraph.append(document.createElement('br'));
-    discountParagraph.append(discount.querySelector('div.cmp-text--size-large').textContent);
-    discountParagraph.append(document.createElement('br'));
-    discountParagraph.append(smallPrints);
+    if (originalDiscount.title) {
+      const amount = document.createElement('strong');
+      amount.textContent = originalDiscount.title.textContent;
+      discountParagraph.append(amount);
+      discountParagraph.append(document.createElement('br'));
+    }
+
+    if (originalDiscount.text) {
+      discountParagraph.append(originalDiscount.text.textContent);
+      discountParagraph.append(document.createElement('br'));
+    }
+
+    if (originalDiscount.smallPrints) {
+      const smallPrints = document.createElement('em');
+      smallPrints.textContent = originalDiscount.smallPrints.textContent;
+      discountParagraph.append(smallPrints);
+    }
 
     currentBlock.append(discountParagraph);
 
