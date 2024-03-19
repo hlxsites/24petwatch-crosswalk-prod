@@ -73,7 +73,14 @@ const createFooter = (main, document) => {
     main.append(ul);
   }
 
-  main.append(main.querySelector('div#footer-notice-global'));
+  const noticeUs = main.querySelector('div#footer-notice-global');
+  const noticeCa = main.querySelector('div#footer-notice-ca');
+
+  if (noticeUs) {
+    main.append(noticeUs);
+  } else {
+    main.append(noticeCa);
+  }
 };
 
 export default createFooter;
