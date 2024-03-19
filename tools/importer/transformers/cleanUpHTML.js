@@ -16,9 +16,9 @@ function cleanUpHTML(main, document) {
 
   main.querySelectorAll('div.button').forEach((e) => {
     const importedLink = e.querySelector('a');
-    const buttonType = importedLink.getAttribute('href').startsWith('https://')
-      ? 'em'
-      : 'strong';
+    const buttonType = e.classList.contains('cmp-button--styleprimary')
+      ? 'strong'
+      : 'em';
     const cta = document.createElement('a');
     const button = document.createElement(buttonType);
     cta.setAttribute('href', importedLink.getAttribute('href'));
