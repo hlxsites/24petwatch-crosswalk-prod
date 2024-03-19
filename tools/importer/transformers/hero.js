@@ -27,11 +27,16 @@ const createHero = (main, document) => {
         }
       }
 
-      const description = hero.querySelector('h4').textContent;
+      const description = document.createElement('div');
+      description.innerHTML = hero.querySelector('h4').innerHTML;
       const ctaText = hero.querySelector('a').textContent;
       const ctaHref = hero.querySelector('a').getAttribute('href');
       const imgSrc = hero.querySelector('img').getAttribute('src');
       const imgAlt = hero.querySelector('img').getAttribute('alt');
+
+      description.querySelectorAll('span.cmp-text--redcolor').forEach((e) => {
+        e.outerHTML = `<em>${e.textContent}</em>`;
+      });
 
       const img = document.createElement('img');
       img.setAttribute('src', imgSrc);
@@ -40,7 +45,7 @@ const createHero = (main, document) => {
       const div = document.createElement('div');
       div.append(h1);
       const p1 = document.createElement('p');
-      p1.textContent = description;
+      p1.append(description);
       div.append(p1);
       const p2 = document.createElement('p');
       const a = document.createElement('a');
