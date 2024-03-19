@@ -1,5 +1,8 @@
 const createHeader = async (main, document) => {
   const header = main.querySelector('div.page-header');
+
+  //console.log(header.outerHTML);
+
   if (header) {
     const logo = document.createElement('span');
     logo.classList.add('icon');
@@ -15,22 +18,7 @@ const createHeader = async (main, document) => {
 
     main.append(document.createElement('hr'));
 
-    const blog = document.createElement('li');
-
     const navigationGroup = document.querySelector('ul.cmp-navigation__group');
-
-    // Remove Pet Care
-    navigationGroup.children[navigationGroup.children.length - 2].remove();
-
-    // Force append blog to the end of the navigation group
-    blog.innerHTML = '<a href="/lost-pet-protection/pet-tags.html" class="cmp-navigation__item-link">Pet Tags</a>';
-    navigationGroup.children[navigationGroup.children.length - 1].before(blog);
-
-    navigationGroup.querySelectorAll('a').forEach((anc) => {
-      if (anc.href.includes('/newsletter/wheres-whisker')) {
-        anc.closest('li').remove();
-      }
-    });
 
     main.append(navigationGroup);
 
@@ -43,14 +31,6 @@ const createHeader = async (main, document) => {
 
       if (!element.classList.contains('languagenavigation') && !ids.includes(link.id)) {
         const li = document.createElement('li');
-
-        if (link.href === 'https://www.mypethealth.com/') {
-          link.textContent = 'Pet Parent Login';
-          const additionalLink = document.createElement('li');
-          additionalLink.innerHTML = '<a href="https://petpro.my24pet.com/search/home">Pet Professionals Login</a>';
-          ul.append(additionalLink);
-        }
-
         ids.push(link.id);
         li.append(link);
         ul.append(li);
