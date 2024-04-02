@@ -1,7 +1,5 @@
 /* global WebImporter */
-
 function createOverflowHero(currentBlock, main, document) {
-
   const discount = currentBlock.querySelector('div.cmp-container--rounded-all');
   discount.remove();
 
@@ -14,7 +12,7 @@ function createOverflowHero(currentBlock, main, document) {
       title: discount.querySelector('div.cmp-title'),
       text: discount.querySelector('div.cmp-text--size-large'),
       smallPrints: discount.querySelector('div.cmp-text-specialfineprint'),
-    }
+    };
 
     if (originalDiscount.title) {
       const amount = document.createElement('strong');
@@ -41,9 +39,9 @@ function createOverflowHero(currentBlock, main, document) {
 
   let blockTitle;
   if (blockClassList.length > 0) {
-    blockTitle = title + ' (' + blockClassList.join(',') + ')'
+    blockTitle = `${title} (${blockClassList.join(',')})`;
   } else {
-    blockTitle = title
+    blockTitle = title;
   }
 
   const overflowHero = [
