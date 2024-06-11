@@ -9,7 +9,7 @@ includes:
   - /content/24petwatch/us/en
   - /content/24petwatch/ca/en
   - /content/experience-fragments/24petwatch/us/en/site/header
-  - /content/experience-fragments/24petwatch/us/ca/site/header
+  - /content/experience-fragments/24petwatch/ca/en/site/header
   - /content/experience-fragments/24petwatch/us/en/site/footer
-  - /content/experience-fragments/24petwatch/us/ca/site/footer
+  - /content/experience-fragments/24petwatch/ca/en/site/footer
   - /content/dam/24-petwatch/crosswalk
